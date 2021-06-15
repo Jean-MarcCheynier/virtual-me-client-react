@@ -7,6 +7,17 @@ export enum MessageSender {
   USER
 }
 
+export interface IDialogQuestion {
+  title: string,
+  buttons: any[]
+}
+
+
+export class DialogQuestion {
+  title: string = "";
+  buttons: any[] = []
+}
+
 export interface IMessage<T> {
   type: MessageType
   content: T

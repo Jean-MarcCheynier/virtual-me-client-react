@@ -1,13 +1,9 @@
-import React from 'react';
-import logo from './logo.svg'
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
-import { Counter } from './features/counter/Counter';
-import Chat from './features/chat/Chat';
 import Signin from './features/auth/Signin';
 
 function App() {
@@ -30,9 +26,6 @@ function App() {
         <Switch>
           <Route path="/signin">
             <Signin/>
-          </Route>
-          <Route path="/chat">
-            <Chat />
           </Route>
         </Switch>
       </div>

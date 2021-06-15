@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { ISigininPayload } from '../../@types/auth';
 import { VirtualMeAPI } from '../../app/axios';
 
