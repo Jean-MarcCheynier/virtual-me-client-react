@@ -1,3 +1,6 @@
+@import '../../style/App.scss';
+@use 'bootstrap/sass/functions';
+
 .scrollableList {
   max-height: calc(100vh - 200px);
   overflow-y: scroll;
@@ -7,4 +10,25 @@
   }
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;  /* Firefox */
+}
+
+.topShadow {
+  position: absolute;
+  z-index: 1; 
+  top: 0; 
+  left: 0;
+  height: 20px;
+  width: 100%; 
+  //background: $VM-bg;
+  background-image: linear-gradient( rgba($VM-bg, 1), 50%, rgba(236, 197, 204, 0));
+}
+
+.bottomShadow {
+  position: absolute;
+  z-index: 1; 
+  bottom: 0; 
+  left: 0;
+  height: 20px;
+  width: '100%'; 
+  background-image: linear-gradient(rgba(236, 197, 204, 0), 60%, rgba(236, 197, 204, 0));
 }

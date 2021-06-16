@@ -11,9 +11,9 @@ export default function Chat(props: ChatProps) {
   
   const { style } = props;
   
-  return <div className="shadow-sm" style={{
+  return <div id="chat" className="shadow-sm" style={{
     ...style,
-    backgroundColor: 'rgb(255,255,255, 0.4)'
+    backgroundColor: 'rgb(255,255,255, 0.1)'
   }}>
     <MessageList />
     <MessageInput />

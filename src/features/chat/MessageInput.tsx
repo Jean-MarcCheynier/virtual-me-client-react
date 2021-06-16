@@ -6,8 +6,6 @@ import Form from 'react-bootstrap/Form'
 
 import { IMessage, MessageSender, MessageType, TextMessage } from '../../@types/message';
 
-import styles from './MessageInput.module.scss';
-
 //Connect 
 import { sendMessageAsync } from './chatSlice';
 
@@ -56,17 +54,15 @@ export const MessageInput = (props: MessageInputProps) => {
   
   
   
-  return <Form className={`mx-2 ${styles.shaddow}`} onSubmit={handleOnSubmit}>
+  return <Form className="m-2 position-relative" onSubmit={handleOnSubmit}>
     <Form.Control
       onChange={handleOnChange}
       onKeyPress={handleOnKeyPress}
       name='message'
       value={message.content}
       as="textarea"
-      placeholder="Leave a comment here"/>
-
-    <MdSend className="text-primary"/>
-
+      placeholder="Leave a comment here" />
+      <MdSend style={{ position: 'absolute', top: '30px', right: '10px' }} className="text-primary" />
   </Form>
 }
 

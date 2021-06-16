@@ -6,11 +6,15 @@ import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import FloatingContainer from './features/chat/FloatingContainer';
+import Portal from './features/Portal';
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <FloatingContainer/>
+      <Portal>
+        <FloatingContainer />
+      </Portal>
+
       <App />
     </Provider>
   </React.StrictMode>,
