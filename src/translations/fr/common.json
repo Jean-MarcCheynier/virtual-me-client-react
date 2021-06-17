@@ -1,0 +1,28 @@
+{
+  "welcome": {
+    "title": "Bienvenu à {{framework}}"
+  },
+  "signin": {
+    "title": "Se connecter",
+    "form": {
+      "login": {
+        "placeholder": "Nom d'utilisateur"
+      },
+      "password": {
+        "placeholder": "Mot de passe"
+      },
+      "submit": {
+        "label": "Envoyer"
+      }
+    }
+  },
+  "chat": {
+    "title": "chat",
+    "form": {
+      "placeholder": "Parle moi!",
+      "error": {
+        "unauthorized": "Hum it's seems your not authorized, please try to login"
+      }
+    }
+  }
+}

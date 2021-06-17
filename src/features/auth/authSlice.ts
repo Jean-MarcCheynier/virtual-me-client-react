@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { signin, signup } from './authAPI';
+import { signin, signup, getMe } from './authAPI';
 
 export interface IAuthState {
   token?: any;
@@ -8,7 +8,9 @@ export interface IAuthState {
 }
 
 const getInitialState: () => IAuthState = () => {
-  let state: IAuthState = { status: 'idle' }
+  let state: IAuthState = {
+    status: 'idle'
+  }
   const strSession = window.sessionStorage.getItem('virtualMe');
   if (strSession) {
     console.info("hasSession")
@@ -24,12 +26,22 @@ const getInitialState: () => IAuthState = () => {
   return state;
 };
 
+export const geMeAsync = createAsyncThunk(
+  'auth/me',
+  async () => {
+    const response = await getMe();
+    return response.data;
+  }
+);
 
 
 export const signinAsync = createAsyncThunk(
   'auth/signin',
   async (payload: { login: string, password: string }) => {
-    const response = await signin(payload);
+    const response = await signin(payload)
+      .then(response => {
+        return response;
+      });
     window.sessionStorage.setItem('virtualMe', JSON.stringify(response.data));
     return response.data;
   }
@@ -69,6 +81,12 @@ export const authSlice = createSlice({
       })
       .addCase(signinAsync.rejected, (state, { meta }) => {
         return { status: 'error' }
+      })
+      .addCase(geMeAsync.fulfilled, (state, action: PayloadAction<any>) => {
+        return { ...state }
+      })
+      .addCase(geMeAsync.rejected, (state, { meta }) => {
+        return getInitialState();
       });
   },
 });

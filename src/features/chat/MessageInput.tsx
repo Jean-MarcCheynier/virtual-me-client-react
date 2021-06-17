@@ -8,6 +8,7 @@ import { IMessage, MessageSender, MessageType, TextMessage } from '../../@types/
 
 //Connect 
 import { sendMessageAsync } from './chatSlice';
+import { useTranslation } from 'react-i18next';
 
 
 type MessageInputProps = {
@@ -18,8 +19,8 @@ type MessageInputProps = {
 export const MessageInput = (props: MessageInputProps) => {
   
   const { onChange, onSubmit } = props;
-  
   const [message, setMessage] = React.useState<IMessage<any>>(new TextMessage(''));
+  const [t] = useTranslation('common');
   
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLElement>): any => {
     if (e.key === "Enter") {
@@ -61,7 +62,7 @@ export const MessageInput = (props: MessageInputProps) => {
       name='message'
       value={message.content}
       as="textarea"
-      placeholder="Leave a comment here" />
+      placeholder={t('chat.form.placeholder')} />
       <MdSend style={{ position: 'absolute', top: '30px', right: '10px' }} className="text-primary" />
   </Form>
 }

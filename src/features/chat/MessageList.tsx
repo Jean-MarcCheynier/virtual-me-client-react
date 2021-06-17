@@ -25,8 +25,6 @@ export const MessageList = (props: MessageListProps) => {
   }
   
   const handleOnScroll = (e: any) => {
-    console.log("Scroll")
-    console.log(e.target.scrollTopMax)
     setShowScroll(e.target.scrollTopMax !== 0);
     
   }

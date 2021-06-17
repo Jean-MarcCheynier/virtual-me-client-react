@@ -3,10 +3,16 @@ import { VirtualMeAPI } from '../../app/axios';
 
 const axiosInstance = VirtualMeAPI.getInstance();
 
-// A mock function to mimic making an async request for data
+
+export function getMe() {
+  return axiosInstance({
+    method: 'get',
+    url: '/auth/me',
+  })
+}
+
+
 export function signin(payload: ISigininPayload) {
-  console.log("coucou")
-  console.log(process.env.REACT_APP_VIRTUAL_ME_API_BASE_URL)
   return axiosInstance({
     method: 'post',
     url: '/auth/signin',
@@ -20,3 +26,5 @@ export function signup(payload: ISigininPayload) {
     setTimeout(() => resolve('ok'), 500)
   );
 }
+
+
