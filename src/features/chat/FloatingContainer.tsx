@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { useEffect } from 'react';
+import { connect } from 'react-redux';
 import Chat from './Chat';
 import styles from "./FloatingContainer.module.scss";
 
@@ -7,13 +8,15 @@ const handleOnClick = (e: React.SyntheticEvent<any>) => {
   console.log(e);
 }
 
-interface IPosition {
-  top: number;
-  left: number;
-  maxWidth: number;
+type FloatingContainerProps = {
+  auth?: any
 }
-
-const FloatingContainer = () => {
+/**
+ * @Description Floating container for Chat.tsx Component. Here we intercept events to position the chat component on hte screen
+ * @returns 
+ */
+export const FloatingContainer = (props: FloatingContainerProps) => {
+  const { auth } = props;
   
   const defaultPosition = {
     top: 50,
@@ -22,12 +25,20 @@ const FloatingContainer = () => {
     maxWidth: 350
   }
   
-  const whileMove = (e: any) => {
-    console.log(e);
-    setPosition({ ...position, left: position.left += e.movementX, top: position.top += e.movementY})
-  }
+  const [position, setPosition] = useState(defaultPosition)
   
+
+  
+  // Set
   useEffect(() => {
+    const whileMove = (e: any) => {
+      console.log(e);
+      setPosition(position => ({
+        ...position,
+        left: position.left += e.movementX,
+        top: position.top += e.movementY
+      }))
+    }
     const chatElement = document.getElementById('chat');
     if (chatElement) {
       
@@ -43,16 +54,19 @@ const FloatingContainer = () => {
       }
       
       chatElement.addEventListener('mousedown', triggerScroll);
+      return () => {
+        chatElement.removeEventListener('mousedown', triggerScroll);
+      }
     }
-    },
-    [])
+  }, [setPosition])
   
-  const [position, setPosition] = useState(defaultPosition)
   
   return <div className={styles.floatingBg}
     onClick={handleOnClick}
   >
-    <Chat style={{
+    <Chat
+      authenticated={auth.role}
+      style={{
       ...position,
       position: 'absolute',
       zIndex: '901',
@@ -61,4 +75,6 @@ const FloatingContainer = () => {
   
 }
 
-export default FloatingContainer;
+const mapStateToProps = (state: any) => ({ auth: state.auth })
+
+export default connect(mapStateToProps, null)(FloatingContainer)

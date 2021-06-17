@@ -4,7 +4,8 @@ export enum MessageType {
 
 export enum MessageSender {
   BOT,
-  USER
+  USER,
+  SYSTEM,
 }
 
 export interface IDialogQuestion {
@@ -19,6 +20,7 @@ export class DialogQuestion {
 }
 
 export interface IMessage<T> {
+  translatable?:boolean,
   type: MessageType
   content: T
   from: MessageSender
@@ -31,9 +33,16 @@ export class TextMessage implements IMessage<String> {
   public content: String;
   public readonly from: MessageSender;
   
-  constructor(content: String) {
+  constructor(content: String, from?: MessageSender) {
     this.content = content;
     this.from = MessageSender.USER;
-    
+  }
+}
+
+export class I18NTextMessage extends TextMessage {
+  public translatable: boolean = true;
+  public readonly from: MessageSender = MessageSender.SYSTEM
+  constructor(content: String, from?: MessageSender ) {
+    super(content);
   }
 }

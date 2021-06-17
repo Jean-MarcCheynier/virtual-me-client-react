@@ -1,4 +1,3 @@
-import React, { useEffect} from 'react';
 import ReactDOM from 'react-dom';
 
 const Portal = (props: any) => {

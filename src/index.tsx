@@ -5,17 +5,44 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
+import { I18nextProvider } from "react-i18next";
+import i18next from "i18next";
+
+
 import FloatingContainer from './features/chat/FloatingContainer';
 import Portal from './features/Portal';
+
+import common_fr from "./translations/fr/common.json";
+import common_en from "./translations/en/common.json";
+import WebSocketProvider from './features/ws/WebSocketProvider';
+
+
+i18next.init({
+  interpolation: { escapeValue: false },  // React already does escaping
+  lng: "fr", // if you're using a language detector, do not define the lng option
+  fallbackLng: "fr",                             // language to use
+  resources: {
+    en: {
+      common: common_en               // 'common' is our custom namespace
+    },
+    fr: {
+      common: common_fr
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Portal>
-        <FloatingContainer />
-      </Portal>
+      <WebSocketProvider>
+        <I18nextProvider i18n={i18next}>
+          <Portal>
+            <FloatingContainer />
+          </Portal>
 
-      <App />
+            <App />
+          </I18nextProvider>
+      </WebSocketProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

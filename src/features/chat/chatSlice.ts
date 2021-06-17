@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { sendMessage } from './chatAPI';
-import { IMessage } from '../../@types/message';
+import { IMessage, I18NTextMessage } from '../../@types/message';
 
 export interface ChatState {
   messageList: any[];
@@ -21,9 +21,22 @@ const initialState: ChatState = {
 export const sendMessageAsync = createAsyncThunk(
   'chat/sendMessage',
   async (message: IMessage<any>, { getState }) => {
-    const response = await sendMessage({ message })
+    const messages = await sendMessage({ message })
+      .then(response => response.data.messages)
+      .catch(e => {
+        if (e.response) {
+          switch (e.response.status) {
+            case 401:
+              return [new I18NTextMessage("chat.form.error.unauthorized")]
+            default:
+              return [new I18NTextMessage("chat.form.error.default")]
+          }
+        } else {
+          return [new I18NTextMessage("chat.form.error.connexion")]
+        }
+      })
     // The value we return becomes the `fulfilled` action payload
-    return response.data.messages;
+    return messages;
   }
 );
 
@@ -50,6 +63,10 @@ export const chatSlice = createSlice({
       })
       .addCase(sendMessageAsync.fulfilled, (state, action: PayloadAction<any>) => {
         state.status = 'idle';
+        state.messageList = [...state.messageList, ...action.payload]
+      })
+      .addCase(sendMessageAsync.rejected, (state, action: PayloadAction<any>) => {
+        state.status = 'error';
         state.messageList = [...state.messageList, ...action.payload]
       });
   },
