@@ -10,7 +10,7 @@ export class VirtualMeAPI {
     if (!this.instance) {
       this.instance = axios.create({
         baseURL: process.env.REACT_APP_VIRTUAL_ME_API_BASE_URL,
-        timeout: 6000,
+        timeout: 60000,
         headers: {
           accept: '*/*',
           'Content-Type': 'application/json',
@@ -24,8 +24,6 @@ export class VirtualMeAPI {
   public static initInterceptor(store: EnhancedStore) {
     this.getInstance().interceptors.request.use(req => {
       const state = store.getState();
-      console.log("State")
-      console.log(state);
       const token = state.auth.jwt;
       req.headers.authorization = `Bearer ${token}`;
       return req;

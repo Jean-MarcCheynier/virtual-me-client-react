@@ -1,13 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-import { signin, signup, getMe } from './authAPI';
-import { IUser } from '../../@types/API/user';
+import { signin, signup, getMe } from './userAPI';
+import { IAuthState } from '../auth/authSlice';
 
-export interface IAuthState {
-  token?: any;
-  status: string;
-  connectedUsers?: IUser[];
-}
 
 const getInitialState: () => IAuthState = () => {
   let state: IAuthState = {

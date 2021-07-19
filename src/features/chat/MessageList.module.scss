@@ -1,5 +1,4 @@
-@import '../../style/App.scss';
-@use 'bootstrap/sass/functions';
+@import '../../style/bootstrap/custom';
 
 .scrollableList {
   max-height: calc(100vh - 200px);

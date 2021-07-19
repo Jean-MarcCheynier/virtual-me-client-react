@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.scss';
 import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
@@ -39,9 +38,8 @@ ReactDOM.render(
           <Portal>
             <FloatingContainer />
           </Portal>
-
-            <App />
-          </I18nextProvider>
+          <App />
+        </I18nextProvider>
       </WebSocketProvider>
     </Provider>
   </React.StrictMode>,

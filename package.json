@@ -15,7 +15,7 @@
     "axios": "^0.21.1",
     "bootstrap": "^5.0.1",
     "i18next": "^20.3.1",
-    "node-sass": "^5.0.0",
+    "node-sass": "^6.0.0",
     "react": "^17.0.2",
     "react-bootstrap": "^1.6.1",
     "react-dom": "^17.0.2",
@@ -30,6 +30,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "build-css": "sass --load-path=node_modules ./src/style/themes/:./public/themes/ --watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -49,6 +50,7 @@
     ]
   },
   "devDependencies": {
-    "@types/react-router-dom": "^5.1.7"
+    "@types/react-router-dom": "^5.1.7",
+    "sass": "^1.35.1"
   }
 }

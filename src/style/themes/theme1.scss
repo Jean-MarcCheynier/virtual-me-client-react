@@ -1,0 +1,17 @@
+// 1. Include functions first (so you can manipulate colors, SVGs, calc, etc)
+//@import "bootstrap/scss/functions";
+
+// 2. Include any default variable overrides here
+
+@import "../bootstrap/custom";
+$primary: #f6e600;
+
+
+
+// 3. Include bootstrap main
+@import 'bootstrap/scss/bootstrap';
+
+body {
+  background: $primary;
+}
+
