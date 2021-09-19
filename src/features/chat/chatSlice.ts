@@ -1,7 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { sendMessage } from './chatAPI';
-import { IMessage, I18NTextMessage } from '../../@types/message';
+import { I18NTextMessage } from '../../@types/message';
+import { ITextMessage } from '@virtual-me/virtual-me-ts-core';
 
 export interface ChatState {
   messageList: any[];
@@ -20,7 +21,7 @@ const initialState: ChatState = {
 // typically used to make async requests.
 export const sendMessageAsync = createAsyncThunk(
   'chat/sendMessage',
-  async (message: IMessage<any>, { getState }) => {
+  async (message: ITextMessage, { getState }) => {
     const messages = await sendMessage({ message })
       .then(response => response.data.messages)
       .catch(e => {
@@ -62,6 +63,7 @@ export const chatSlice = createSlice({
         state.messageList = [...state.messageList, meta.arg]
       })
       .addCase(sendMessageAsync.fulfilled, (state, action: PayloadAction<any>) => {
+        console.log(action);
         state.status = 'idle';
         state.messageList = [...state.messageList, ...action.payload]
       })

@@ -1,6 +1,11 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
+<<<<<<< HEAD
 import { signin, signup, getMe } from './authAPI';
+=======
+import { signin, signup } from './authAPI';
+import { IUser } from '@virtual-me/virtual-me-ts-core';
+>>>>>>> db2f05a... Refactor with virtual-me-core
 
 export interface IAuthState {
   token?: any;
@@ -76,7 +81,7 @@ export const authSlice = createSlice({
       .addCase(signinAsync.pending, (state, { meta }) => {
         return { status: 'loading' };
       })
-      .addCase(signinAsync.fulfilled, (state, action: PayloadAction<any>) => {
+      .addCase(signinAsync.fulfilled, (state, action: PayloadAction<IUser>) => {
         return { ...state, status: 'idle', ...action.payload }
       })
       .addCase(signinAsync.rejected, (state, { meta }) => {

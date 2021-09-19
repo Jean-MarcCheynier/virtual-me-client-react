@@ -2168,10 +2168,10 @@
     "@typescript-eslint/types" "4.15.2"
     eslint-visitor-keys "^2.0.0"
 
-"@virtual-me/virtual-me-ts-core@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@virtual-me/virtual-me-ts-core/-/virtual-me-ts-core-1.0.4.tgz#9fe9a4be8d70418fc12991db7dcaddb1256a1ba6"
-  integrity sha512-Gkn24E1ygbnCoPh6bDznH6rEwHyrE+9l20VhCPP5L8tH8u9htgBhQ0iJUR1FZc4kzVjrOiYDeuCHeqQjeaD9hw==
+"@virtual-me/virtual-me-ts-core@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@virtual-me/virtual-me-ts-core/-/virtual-me-ts-core-1.0.7.tgz#cd09a93d8d724120f6e195047cb4f2ab1a553b28"
+  integrity sha512-buMHgj8vxz4fvcZirt+pSyMS9HHMB8GXECBsL3DPJb2hMv+eGX6JXOb21ZOvLlKWsc73wI6Sh4kY9BHk3i/5Tw==
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"

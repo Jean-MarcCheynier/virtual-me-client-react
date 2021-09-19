@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { selectMessageList } from './chatSlice';
 
-import { IMessage, MessageSender, IDialogQuestion } from '../../@types/message';
+import { IMessage, RecipientType } from '@virtual-me/virtual-me-ts-core';
 import Message from './Message';
 
 import styles from './MessageList.module.scss';
 
 type MessageListProps = {
-  messageList: IMessage<String | IDialogQuestion>[]
+  messageList: IMessage<any>[]
 }
 
 export const MessageList = (props: MessageListProps) => {
@@ -44,7 +44,7 @@ export const MessageList = (props: MessageListProps) => {
     <div className={`mx-2 py-2 ${styles.scrollableList}`} onScroll={handleOnScroll}>
       {messageList.length !== 0 && messageList.map((msg, index) =>
       <div key={index}
-        className={`mw-75 d-flex ${msg.from === MessageSender.BOT ? 'flex-row' : 'flex-row-reverse'} bd-highlight`}>
+        className={`mw-75 d-flex ${msg?.from?.type === RecipientType.BOT ? 'flex-row' : 'flex-row-reverse'} bd-highlight`}>
         <Message message={msg} />
       </div>)}
       <div ref={bottomList} />
