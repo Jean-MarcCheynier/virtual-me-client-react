@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { MdSend } from 'react-icons/md';
 import Form from 'react-bootstrap/Form'
 
-import { IMessage, MessageSender, MessageType, TextMessage } from '../../@types/message';
+import { ITextMessage, RecipientType, MessageType, TextMessage } from '@virtual-me/virtual-me-ts-core';
 
 //Connect 
 import { sendMessageAsync } from './chatSlice';
@@ -12,14 +12,14 @@ import { useTranslation } from 'react-i18next';
 
 
 type MessageInputProps = {
-  onChange?: (message: IMessage<any>) => any,
-  onSubmit: (message: IMessage<any>) => void
+  onChange?: (message: ITextMessage) => any,
+  onSubmit: (message: ITextMessage) => void
 }
 
 export const MessageInput = (props: MessageInputProps) => {
   
   const { onChange, onSubmit } = props;
-  const [message, setMessage] = React.useState<IMessage<any>>(new TextMessage(''));
+  const [message, setMessage] = React.useState<ITextMessage>(new TextMessage(''));
   const [t] = useTranslation('common');
   
   const handleOnKeyPress = (e: React.KeyboardEvent<HTMLElement>): any => {
@@ -31,9 +31,11 @@ export const MessageInput = (props: MessageInputProps) => {
   const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const content: any = e.target.value;
     if (typeof content === 'string') {
-      const message: IMessage<String> = {
+      const message: ITextMessage = {
         type: MessageType.TEXT,
-        from: MessageSender.USER,
+        from: {
+          type: RecipientType.USER
+        },
         content: content
       }
       setMessage(message);

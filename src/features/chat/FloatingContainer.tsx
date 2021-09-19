@@ -27,12 +27,9 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
   
   const [position, setPosition] = useState(defaultPosition)
   
-
-  
   // Set
   useEffect(() => {
     const whileMove = (e: any) => {
-      console.log(e);
       setPosition(position => ({
         ...position,
         left: position.left += e.movementX,
