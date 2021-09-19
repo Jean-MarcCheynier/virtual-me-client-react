@@ -1,5 +1,5 @@
 import React, { createContext } from 'react'
-import { useDispatch, Provider } from 'react-redux';
+//import { useDispatch, Provider } from 'react-redux';
 import { socket } from './socketUtil';
 
 const WebSocketContext = createContext(null)
@@ -13,7 +13,7 @@ type WebSocketProviderProps = {
 function WebSocketProvider(props: WebSocketProviderProps) {
 
   const { children } = props;
-  const dispatch = useDispatch();
+  //const dispatch = useDispatch();
   const sendMessage = (roomId: string, message: string) => {
     const payload = {
       roomId: roomId,

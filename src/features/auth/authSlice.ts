@@ -1,11 +1,8 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
-<<<<<<< HEAD
 import { signin, signup, getMe } from './authAPI';
-=======
-import { signin, signup } from './authAPI';
 import { IUser } from '@virtual-me/virtual-me-ts-core';
->>>>>>> db2f05a... Refactor with virtual-me-core
+
 
 export interface IAuthState {
   token?: any;

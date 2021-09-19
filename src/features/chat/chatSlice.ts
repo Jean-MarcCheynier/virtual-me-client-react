@@ -23,7 +23,7 @@ export const sendMessageAsync = createAsyncThunk(
   'chat/sendMessage',
   async (message: ITextMessage, { getState }) => {
     const messages = await sendMessage({ message })
-      .then(response => response.data.messages)
+      .then(response => response.data)
       .catch(e => {
         if (e.response) {
           switch (e.response.status) {

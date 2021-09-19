@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useAppDispatch } from '../../app/hooks';
-import { signinAsync, signout } from './authSlice';
+import { signinAsync, /*signout*/ } from './authSlice';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useTranslation } from 'react-i18next';
@@ -15,9 +15,9 @@ function Signin() {
   const [form, setForm] = useState({ ...initialState});
   
 
-  const handleOnSignout = () => {
-    dispatch(signout())
-  }
+  // const handleOnSignout = () => {
+  //   dispatch(signout())
+  // }
   
   
   const handleOnSubmit = (e: any) => {
