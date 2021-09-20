@@ -1,0 +1,34 @@
+.type-writer-1{
+  animation-delay: 3s, 0s;
+  animation-duration: 3s, .75s;
+  animation-iteration-count: 1, 8;
+  animation-timing-function: steps(16, end), step-end ;
+}
+
+.type-writer-2{
+  animation-delay: 6s, 6s;
+  animation-duration: 4.5s, .75s;
+  animation-iteration-count: 1, 5;
+  animation-timing-function: steps(24, end), step-end ;
+}
+
+.type-writer-3{
+  animation-delay: 11.5s,  11.5s;
+  animation-duration: 1.5s, .75s;
+  animation-iteration-count: 1, 2;
+  animation-timing-function: steps(8, end), step-end ;
+}
+
+.type-writer-4{
+  animation-delay: 13.5s, 13.5s;
+  animation-duration: 3s, .75s;
+  animation-iteration-count: 1, 8;
+  animation-timing-function: steps(16, end), step-end ;
+}
+
+.type-writer-5{
+  animation-delay: 16s, 16s;
+  animation-duration: 3s, .75s;
+  animation-iteration-count: 1, 4;
+  animation-timing-function: steps(16, end), step-end ;
+}

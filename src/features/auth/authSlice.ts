@@ -1,11 +1,12 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { signin, signup, getMe } from './authAPI';
-import { IUser } from '@virtual-me/virtual-me-ts-core';
+import { IUser, Role } from '@virtual-me/virtual-me-ts-core';
 
 
 export interface IAuthState {
   token?: any;
+  role?: Role
   status: string
 }
 

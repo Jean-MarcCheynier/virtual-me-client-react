@@ -4,7 +4,7 @@ import Signin from '../auth/Signin';
 
 type ChatProps = {
   style?: any,
-  authenticated: boolean
+  authenticated: boolean | null
 }
 
 
@@ -25,9 +25,6 @@ export default function Chat(props: ChatProps) {
       :
       <Signin />
     }
-
-
-
     </div>
 
 }

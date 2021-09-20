@@ -1,37 +1,35 @@
 import {
-  BrowserRouter as Router,
+  useLocation,
   Switch,
   Route,
 } from "react-router-dom";
+import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Signin from './features/auth/Signin';
+import Landing from './features/home/Landing';
+import Home from './features/home/Home';
 
 
 
 function App() {
   
+  const location = useLocation()
+  
   return (
-    <Router>
-      <div>
-{/*         <nav>
-          <ul>
-            <li>
-              <Link to="/signin">{t('signin.title')}</Link>
-            </li>
-            <li>
-              <Link to="/chat">Chat</Link>
-            </li>
-          </ul>
-        </nav> */}
-
-        {/* A <Switch> looks through its children <Route>s and
-            renders the first one that matches the current URL. */}
-        <Switch>
-          <Route path="/signin">
-            <Signin/>
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <div>
+      <TransitionGroup>
+        <CSSTransition
+          timeout={300}
+          classNames='fade'
+          key={location.key}
+        >
+          <Switch location={location}>
+            <Route path="/" exact={true} component={Landing} />
+            <Route path="/home" component={Home} />
+            <Route path="/signin" component={Signin} />
+          </Switch>
+        </CSSTransition>
+      </TransitionGroup>
+    </div>
   );
 }
 

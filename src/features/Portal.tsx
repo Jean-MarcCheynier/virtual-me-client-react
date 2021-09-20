@@ -2,11 +2,11 @@ import ReactDOM from 'react-dom';
 
 const Portal = (props: any) => {
   
-  const modalRoot = document.getElementById('chat-root') || document.createElement('div');
+  const chatRoot = document.getElementById('chat-root') || document.createElement('div');
   
   return ReactDOM.createPortal(
     props.children,
-    modalRoot);
+    chatRoot);
 }
 
 export default Portal;

@@ -12,7 +12,8 @@ type FloatingContainerProps = {
   auth?: any
 }
 /**
- * @Description Floating container for Chat.tsx Component. Here we intercept events to position the chat component on hte screen
+ * @Description Floating container for Chat.tsx Component. 
+ * Here we intercept events to position the chat component on the screen
  * @returns 
  */
 export const FloatingContainer = (props: FloatingContainerProps) => {
@@ -25,15 +26,17 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
     maxWidth: 350
   }
   
-  const [position, setPosition] = useState(defaultPosition)
+  const [position, setPosition] = useState(defaultPosition);
+  const [initialPosition, setIinitialPosition] = useState(defaultPosition);
   
   // Set
   useEffect(() => {
+    const offset = { left: 0, right: 0 }
     const whileMove = (e: any) => {
       setPosition(position => ({
         ...position,
-        left: position.left += e.movementX,
-        top: position.top += e.movementY
+        left: e.clientX - offset.left,
+        top: e.clientY - offset.right,
       }))
     }
     const chatElement = document.getElementById('chat');
@@ -45,6 +48,8 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
       };
       
       const triggerScroll = (event: any) => {
+        offset.left = event.layerX;
+        offset.right = event.layerY;
         event.stopPropagation(); // remove if you do want it to propagate ..
         window.addEventListener('mousemove', whileMove);
         window.addEventListener('mouseup', endMove);

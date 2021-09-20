@@ -1,0 +1,79 @@
+
+.enter{
+  text-align: center;
+  height: 75vh;
+  .centered{
+    position: absolute;
+    top: 50%;
+  }
+}
+
+.type-writer-container{
+  padding : 20px;
+  margin : auto;
+  display: block;
+}
+
+.wrapper{
+  display: inline-block;
+}
+
+.type-writer{
+  max-width: 0%;
+  margin: 5px;
+  overflow:hidden;
+  display: inline-block;
+  border-right: .15em solid transparent; /* The typwriter cursor */
+  white-space: nowrap; /* Keeps the content on a single line */
+  margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+  letter-spacing: .15em; /* Adjust as needed */
+  animation-name: typing, type-writer;
+  animation-fill-mode: forwards, forwards;
+}
+
+.type-writer-1{
+  animation-delay: 3s, 0s;
+  animation-duration: 3s, .75s;
+  animation-iteration-count: 1, 8;
+  animation-timing-function: steps(16, end), step-end ;
+}
+
+.type-writer-2{
+  animation-delay: 6s, 6s;
+  animation-duration: 4.5s, .75s;
+  animation-iteration-count: 1, 5;
+  animation-timing-function: steps(24, end), step-end ;
+}
+
+.type-writer-3{
+  animation-delay: 11.5s,  11.5s;
+  animation-duration: 1.5s, .75s;
+  animation-iteration-count: 1, 2;
+  animation-timing-function: steps(8, end), step-end ;
+}
+
+.type-writer-4{
+  animation-delay: 13.5s, 13.5s;
+  animation-duration: 3s, .75s;
+  animation-iteration-count: 1, 8;
+  animation-timing-function: steps(16, end), step-end ;
+}
+
+.type-writer-5{
+  animation-delay: 16s, 16s;
+  animation-duration: 3s, .75s;
+  animation-iteration-count: 1, 4;
+  animation-timing-function: steps(16, end), step-end ;
+}
+
+/* The typing effect */
+@keyframes typing {
+  from { max-width : 1% }
+  to { max-width: 100% }
+}
+
+/* The typewriter cursor effect */
+@keyframes type-writer {
+  from, to { border-color:  transparent; }
+  50% { border-color: orange }
+}
