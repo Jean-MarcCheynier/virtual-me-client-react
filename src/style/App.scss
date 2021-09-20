@@ -1,16 +1,7 @@
 @import './bootstrap';
+@import './animations';
 $VM-bg: $red-300;
 
 body {
   background: $VM-bg;
-}
-
-.fade-enter {
-  opacity: 0;
-  z-index: 1;
-}
-
-.fade-enter.fade-enter-active {
-  opacity: 1;
-  transition: opacity 250ms ease-in;
 }

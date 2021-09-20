@@ -2,14 +2,11 @@ import React, {useState} from 'react';
 import { useEffect } from 'react';
 import { connect } from 'react-redux';
 import Chat from './Chat';
+import { ChatPosition } from './chatSlice';
 import styles from "./FloatingContainer.module.scss";
 
-const handleOnClick = (e: React.SyntheticEvent<any>) => {
-  console.log(e);
-}
-
 type FloatingContainerProps = {
-  auth?: any
+  displayChat?: boolean 
 }
 /**
  * @Description Floating container for Chat.tsx Component. 
@@ -17,7 +14,6 @@ type FloatingContainerProps = {
  * @returns 
  */
 export const FloatingContainer = (props: FloatingContainerProps) => {
-  const { auth } = props;
   
   const defaultPosition = {
     top: 50,
@@ -27,7 +23,7 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
   }
   
   const [position, setPosition] = useState(defaultPosition);
-  const [initialPosition, setIinitialPosition] = useState(defaultPosition);
+  const { displayChat } = props;
   
   // Set
   useEffect(() => {
@@ -40,8 +36,7 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
       }))
     }
     const chatElement = document.getElementById('chat');
-    if (chatElement) {
-      
+    if (displayChat && chatElement) {
       const endMove = () => {
         window.removeEventListener('mousemove', whileMove);
         window.removeEventListener('mouseup', endMove);
@@ -60,23 +55,27 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
         chatElement.removeEventListener('mousedown', triggerScroll);
       }
     }
-  }, [setPosition])
+  }, [setPosition, displayChat])
   
-  
-  return <div className={styles.floatingBg}
-    onClick={handleOnClick}
-  >
-    <Chat
-      authenticated={auth.role}
-      style={{
-      ...position,
-      position: 'absolute',
-      zIndex: '901',
-    }} />
-  </div>
+  if (displayChat) {
+    return (
+    <div className={styles.floatingBg}>
+        {displayChat &&
+          <Chat style={{
+            ...position,
+            position: 'absolute',
+            zIndex: '901',
+          }}/>}
+    </div>)
+  } else {
+    return null;
+  }
+
   
 }
 
-const mapStateToProps = (state: any) => ({ auth: state.auth })
+const mapStateToProps = (state: any) => ({
+  displayChat: state.chat.position === ChatPosition.FLOATING
+})
 
 export default connect(mapStateToProps, null)(FloatingContainer)
