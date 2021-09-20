@@ -1,0 +1,12 @@
+/* French (default language)*/
+[data-i18n]::before {
+  content: attr(data-i18n);
+}
+/* English */
+[data-i18n-en]:lang(en)::before {
+  content: attr(data-i18n-en);
+}
+
+.fr-hidden:lang(fr){
+  display: none !important;
+}

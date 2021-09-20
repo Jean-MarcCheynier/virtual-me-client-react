@@ -4,14 +4,21 @@ import { sendMessage } from './chatAPI';
 import { I18NTextMessage } from '../../@types/message';
 import { ITextMessage } from '@virtual-me/virtual-me-ts-core';
 
+export enum ChatPosition {
+  FLOATING='floating',
+  FIXED='fixed'
+}
+
 export interface ChatState {
   messageList: any[];
-  status: string
+  status: string;
+  position: ChatPosition
 }
 
 const initialState: ChatState = {
   messageList: [],
-  status: 'idle'
+  status: 'idle',
+  position: ChatPosition.FIXED
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -46,6 +53,7 @@ export const chatSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
+    setPosition: (state, action) => ({ ...state, position: action.payload }),
     sendMessage: (state, action) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
@@ -77,5 +85,6 @@ export const chatSlice = createSlice({
 //export const { increment, decrement, incrementByAmount } = chatSlice.actions;
 
 export const selectMessageList = (state: RootState) => state.chat.messageList;
-
+export const selectChatPostion = (state: RootState): ChatPosition => state.chat.position;
+export const { setPosition } = chatSlice.actions;
 export default chatSlice.reducer;

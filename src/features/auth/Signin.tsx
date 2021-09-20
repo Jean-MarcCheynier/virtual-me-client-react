@@ -5,10 +5,11 @@ import { signinAsync, /*signout*/ } from './authSlice';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useTranslation } from 'react-i18next';
+import { RouteComponentProps } from 'react-router';
 
 
 
-function Signin() {
+function Signin(props: RouteComponentProps<{}, any, unknown> | any) {
   const [t] = useTranslation('common');
   const initialState = { login: '', password: '' };
   const dispatch = useAppDispatch();

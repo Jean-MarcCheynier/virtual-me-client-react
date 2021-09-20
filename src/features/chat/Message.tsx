@@ -55,7 +55,7 @@ export function Message(props: MessageProps) {
       bg = 'primary'
       break;
     case RecipientType.BOT:
-      bg = 'secondary'
+      bg = 'light'
       break;
     case RecipientType.SYSTEM:
       bg = 'warning'
