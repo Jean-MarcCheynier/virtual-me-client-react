@@ -4,9 +4,10 @@ import { connect } from 'react-redux';
 import Chat from './Chat';
 import { ChatPosition } from './chatSlice';
 import styles from "./FloatingContainer.module.scss";
+import { CSSTransition } from 'react-transition-group';
 
 type FloatingContainerProps = {
-  displayChat?: boolean 
+  chatPosition?: ChatPosition 
 }
 /**
  * @Description Floating container for Chat.tsx Component. 
@@ -18,12 +19,10 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
   const defaultPosition = {
     top: 50,
     left: 450,
-    width: 350,
-    maxWidth: 350
   }
   
   const [position, setPosition] = useState(defaultPosition);
-  const { displayChat } = props;
+  const { chatPosition } = props;
   
   // Set
   useEffect(() => {
@@ -36,7 +35,7 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
       }))
     }
     const chatElement = document.getElementById('chat');
-    if (displayChat && chatElement) {
+    if (chatPosition && chatElement) {
       const endMove = () => {
         window.removeEventListener('mousemove', whileMove);
         window.removeEventListener('mouseup', endMove);
@@ -55,27 +54,30 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
         chatElement.removeEventListener('mousedown', triggerScroll);
       }
     }
-  }, [setPosition, displayChat])
+  }, [setPosition, chatPosition])
   
-  if (displayChat) {
+
     return (
-    <div className={styles.floatingBg}>
-        {displayChat &&
+    <div className={`${styles.floatingBg} ${ChatPosition.FIXED === chatPosition?'d-none':''}`}>
+      <CSSTransition
+        in={chatPosition === ChatPosition.BUBBLE}
+        key = "bubbleAnimation"
+        timeout={400}
+        classNames='my-node'>
           <Chat style={{
-            ...position,
+            ...(chatPosition === ChatPosition.FLOATING)?position:{},
             position: 'absolute',
             zIndex: '901',
-          }}/>}
+          }}/>
+      
+        </CSSTransition>
     </div>)
-  } else {
-    return null;
-  }
 
   
 }
 
 const mapStateToProps = (state: any) => ({
-  displayChat: state.chat.position === ChatPosition.FLOATING
+  chatPosition: state.chat.position
 })
 
 export default connect(mapStateToProps, null)(FloatingContainer)

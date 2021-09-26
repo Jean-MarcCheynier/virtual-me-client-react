@@ -5,6 +5,7 @@ import { I18NTextMessage } from '../../@types/message';
 import { ITextMessage } from '@virtual-me/virtual-me-ts-core';
 
 export enum ChatPosition {
+  BUBBLE='bubble',
   FLOATING='floating',
   FIXED='fixed'
 }

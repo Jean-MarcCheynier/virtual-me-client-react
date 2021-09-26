@@ -8,17 +8,17 @@ import { ChatPosition } from '../chat/chatSlice';
 
 type HomeProps = {
   auth: IAuthState;
-  displayChat: boolean;
+  position: ChatPosition;
 }
 
 
 const Home = (props: HomeProps) => {
-  const { displayChat } = props;
+  const { position } = props;
   
   return <Container fluid>
     <Row>
       <CSSTransition
-        in={displayChat}
+        in={position === ChatPosition.FIXED}
         timeout={500}
         unmountOnExit
         classNames='fade'>
@@ -33,7 +33,7 @@ const Home = (props: HomeProps) => {
 
 const mapStateToProps = (state: any) => ({
   auth: state.auth,
-  displayChat: state.chat.position === ChatPosition.FIXED
+  position: state.chat.position
 })
 
 export default connect(mapStateToProps)(Home)

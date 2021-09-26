@@ -18,3 +18,59 @@
   transform: scale(0.9);
   transition: opacity 300ms, transform 300ms;
 }
+
+// Bubble
+.bubble {
+  //border-radius: 50%;
+  //height: 50px;
+  //width: 50px;
+
+  &.my-node {
+    border-radius: 0;
+    height: 350px;
+    width: 350px
+  }
+  
+  &.my-node-enter {
+  
+    border-radius: 0;
+    height: 350px;
+    width: 350px
+  }
+
+  &.my-node-enter-active {
+  
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    bottom: 50px;
+    right: 50px;
+    transition: height 350ms, width 350ms, border-radius 350ms, bottom 350ms, right 350ms;
+  }
+  
+  &.my-node-enter-done {
+    height: 50px;
+    width: 50px;
+    border-radius: 50%;
+    bottom: 50px;
+    right: 50px;
+  }
+  
+  &.my-node-exit {
+    //height: 50px;
+    //width: 50px;
+    //border-radius: 50%;
+  }
+  &.my-node-exit-active {
+    //border-radius: 50%;
+    //height: 75px;
+    //width: 75px;
+    //transition: height 150ms, width 150ms
+  }
+  
+  &.my-node-exit-done {
+  }
+}
+
+
+
