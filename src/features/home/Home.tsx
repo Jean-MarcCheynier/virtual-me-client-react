@@ -2,13 +2,13 @@ import React from 'react'
 import { Col, Container, Row } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { IAuthState } from '../auth/authSlice';
-import Chat from '../chat/Chat';
 import { CSSTransition } from 'react-transition-group';
-import { ChatPosition } from '../chat/chatSlice';
+import { ChatLayout } from '../chat/chatSlice';
+import { FloatingContainer } from '../chat/FloatingContainer';
 
 type HomeProps = {
   auth: IAuthState;
-  position: ChatPosition;
+  position: ChatLayout;
 }
 
 
@@ -18,12 +18,12 @@ const Home = (props: HomeProps) => {
   return <Container fluid>
     <Row>
       <CSSTransition
-        in={position === ChatPosition.FIXED}
+        in={position === ChatLayout.FIXED}
         timeout={500}
         unmountOnExit
         classNames='fade'>
         <Col className="d-xs-none" md="3" lg="4">
-          <Chat />
+          <FloatingContainer display={[ChatLayout.FIXED]}/>
         </Col>
       </CSSTransition>
       <Col >2 of 2</Col>

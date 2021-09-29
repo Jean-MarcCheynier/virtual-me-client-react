@@ -25,20 +25,20 @@
   //height: 50px;
   //width: 50px;
 
-  &.my-node {
+  &.floating-chat {
     border-radius: 0;
     height: 350px;
     width: 350px
   }
   
-  &.my-node-enter {
+  &.floating-chat-enter {
   
     border-radius: 0;
     height: 350px;
     width: 350px
   }
 
-  &.my-node-enter-active {
+  &.floating-chat-enter-active {
   
     border-radius: 50%;
     height: 50px;
@@ -48,7 +48,7 @@
     transition: height 350ms, width 350ms, border-radius 350ms, bottom 350ms, right 350ms;
   }
   
-  &.my-node-enter-done {
+  &.floating-chat-enter-done {
     height: 50px;
     width: 50px;
     border-radius: 50%;
@@ -56,19 +56,19 @@
     right: 50px;
   }
   
-  &.my-node-exit {
+  &.floating-chat-exit {
     //height: 50px;
     //width: 50px;
     //border-radius: 50%;
   }
-  &.my-node-exit-active {
+  &.floating-chat-exit-active {
     //border-radius: 50%;
     //height: 75px;
     //width: 75px;
     //transition: height 150ms, width 150ms
   }
   
-  &.my-node-exit-done {
+  &.floating-chat-exit-done {
   }
 }
 

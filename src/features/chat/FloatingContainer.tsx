@@ -1,13 +1,14 @@
 import React, {useState} from 'react';
-import { useEffect } from 'react';
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Chat from './Chat';
-import { ChatPosition } from './chatSlice';
+import { ChatLayout, setLayout, selectChatLayout } from './chatSlice';
 import styles from "./FloatingContainer.module.scss";
 import { CSSTransition } from 'react-transition-group';
+import ButtonGroup from './ButtonGroup';
 
 type FloatingContainerProps = {
-  chatPosition?: ChatPosition 
+  chatLayout: ChatLayout,
+  display?: ChatLayout[]
 }
 /**
  * @Description Floating container for Chat.tsx Component. 
@@ -21,63 +22,83 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
     left: 450,
   }
   
+  const defaultOffset = {
+    top: 0,
+    left: 0,
+  }
+  
   const [position, setPosition] = useState(defaultPosition);
-  const { chatPosition } = props;
+  const [offset, setOffset] = useState(defaultOffset);
+  const { chatLayout, display } = props;
   
-  // Set
-  useEffect(() => {
-    const offset = { left: 0, right: 0 }
-    const whileMove = (e: any) => {
-      setPosition(position => ({
-        ...position,
-        left: e.clientX - offset.left,
-        top: e.clientY - offset.right,
-      }))
-    }
-    const chatElement = document.getElementById('chat');
-    if (chatPosition && chatElement) {
-      const endMove = () => {
-        window.removeEventListener('mousemove', whileMove);
-        window.removeEventListener('mouseup', endMove);
-      };
-      
-      const triggerScroll = (event: any) => {
-        offset.left = event.layerX;
-        offset.right = event.layerY;
-        event.stopPropagation(); // remove if you do want it to propagate ..
-        window.addEventListener('mousemove', whileMove);
-        window.addEventListener('mouseup', endMove);
-      }
-      
-      chatElement.addEventListener('mousedown', triggerScroll);
-      return () => {
-        chatElement.removeEventListener('mousedown', triggerScroll);
-      }
-    }
-  }, [setPosition, chatPosition])
+  const dispatch = useDispatch();
+
+  const setFloatting = () => {
+    dispatch(setLayout(ChatLayout.FLOATING))
+  }
+  
+  const whileMove = (e: any) => {
+    //console.info("while move");
+    //console.info(e);
+    setPosition(position => ({
+      ...position,
+      left: e.pageX - offset.left,
+      top: e.pageY - offset.top,
+    }))
+  }
   
 
-    return (
-    <div className={`${styles.floatingBg} ${ChatPosition.FIXED === chatPosition?'d-none':''}`}>
-      <CSSTransition
-        in={chatPosition === ChatPosition.BUBBLE}
-        key = "bubbleAnimation"
-        timeout={400}
-        classNames='my-node'>
-          <Chat style={{
-            ...(chatPosition === ChatPosition.FLOATING)?position:{},
-            position: 'absolute',
-            zIndex: '901',
-          }}/>
-      
-        </CSSTransition>
-    </div>)
-
+  const endMove = () => {
+    //console.info("end move");
+    window.removeEventListener('mousemove', whileMove);
+    window.removeEventListener('mouseup', endMove);
+  };
   
+  // Trigger scroll on mousedown
+  const handleOnMouseDown = (e: any) => {
+    if (chatLayout === ChatLayout.FLOATING) {
+      //console.log(e)
+      e.stopPropagation(); // remove if you do want it to propagate ..
+      setOffset({ left: e.nativeEvent.layerX, top: e.nativeEvent.layerY })
+      window.addEventListener('mousemove', whileMove);
+      window.addEventListener('mouseup', endMove);
+      
+    }
+  }
+  
+  const handleOnClick = (e: any) => {
+    if (chatLayout === ChatLayout.BUBBLE) { setFloatting() }
+  }
+  
+  const displayContainer = !display || display.includes(chatLayout)
+  
+  return (
+    <CSSTransition
+      in={chatLayout === ChatLayout.BUBBLE}
+      timeout={400}
+      classNames='floating-chat'>
+      <div className={`${styles.floatingBg} bubble shadow-sm p-2`}
+        style={{
+          ...(chatLayout === ChatLayout.FLOATING) ? position : {},
+          backgroundColor: 'rgb(255,255,255, 0.1)'
+        }}
+        onMouseDown={handleOnMouseDown}
+        onClick={handleOnClick}
+      >
+        {chatLayout !== ChatLayout.BUBBLE &&
+        <>
+          <ButtonGroup/>
+          <Chat />
+        </>
+        }
+            
+      </div>
+        
+    </CSSTransition>)
 }
 
 const mapStateToProps = (state: any) => ({
-  chatPosition: state.chat.position
+  chatLayout: selectChatLayout(state)
 })
 
 export default connect(mapStateToProps, null)(FloatingContainer)
