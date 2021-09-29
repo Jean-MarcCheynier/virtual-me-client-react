@@ -13,13 +13,15 @@ export enum ChatLayout {
 export interface ChatState {
   messageList: any[];
   status: string;
-  position: ChatLayout
+  prevLayout: ChatLayout;
+  layout: ChatLayout;
 }
 
 const initialState: ChatState = {
   messageList: [],
   status: 'idle',
-  position: ChatLayout.FIXED
+  prevLayout: ChatLayout.FIXED,
+  layout: ChatLayout.FIXED
 };
 
 // The function below is called a thunk and allows us to perform async logic. It
@@ -54,7 +56,8 @@ export const chatSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    setLayout: (state, action) => ({ ...state, position: action.payload }),
+    setLayout: (state, action) => ({ ...state, prevLayout: state.layout , layout: action.payload }),
+    restoreLayout: (state ) =>({...state, layout: state.prevLayout}),
     sendMessage: (state, action) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
       // doesn't actually mutate the state because it uses the Immer library,
@@ -86,6 +89,6 @@ export const chatSlice = createSlice({
 //export const { increment, decrement, incrementByAmount } = chatSlice.actions;
 
 export const selectMessageList = (state: RootState) => state.chat.messageList;
-export const selectChatLayout = (state: RootState): ChatLayout => state.chat.position;
-export const { setLayout } = chatSlice.actions;
+export const selectChatLayout = (state: RootState): ChatLayout => state.chat.layout;
+export const { setLayout, restoreLayout } = chatSlice.actions;
 export default chatSlice.reducer;

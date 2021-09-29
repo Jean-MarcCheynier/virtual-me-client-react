@@ -1,13 +1,13 @@
 import React, {useState} from 'react';
 import { connect, useDispatch } from 'react-redux';
 import Chat from './Chat';
-import { ChatLayout, setLayout, selectChatLayout } from './chatSlice';
-import styles from "./FloatingContainer.module.scss";
+import { ChatLayout, selectChatLayout, restoreLayout } from './chatSlice';
+import styles from "./FloatingChat.module.scss";
 import { CSSTransition } from 'react-transition-group';
 import ButtonGroup from './ButtonGroup';
 
-type FloatingContainerProps = {
-  chatLayout: ChatLayout,
+type FloatingChatProps = {
+  chatLayout?: ChatLayout,
   display?: ChatLayout[]
 }
 /**
@@ -15,7 +15,7 @@ type FloatingContainerProps = {
  * Here we intercept events to position the chat component on the screen
  * @returns 
  */
-export const FloatingContainer = (props: FloatingContainerProps) => {
+export const FloatingChat = (props: FloatingChatProps) => {
   
   const defaultPosition = {
     top: 50,
@@ -32,10 +32,6 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
   const { chatLayout, display } = props;
   
   const dispatch = useDispatch();
-
-  const setFloatting = () => {
-    dispatch(setLayout(ChatLayout.FLOATING))
-  }
   
   const whileMove = (e: any) => {
     //console.info("while move");
@@ -62,24 +58,26 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
       setOffset({ left: e.nativeEvent.layerX, top: e.nativeEvent.layerY })
       window.addEventListener('mousemove', whileMove);
       window.addEventListener('mouseup', endMove);
-      
     }
   }
   
   const handleOnClick = (e: any) => {
-    if (chatLayout === ChatLayout.BUBBLE) { setFloatting() }
+    if (chatLayout === ChatLayout.BUBBLE) { dispatch(restoreLayout()) }
   }
   
-  const displayContainer = !display || display.includes(chatLayout)
+  //If the attribute 'display' is specified, then display the inner component only for the ChatPosition specified.
+  //If it is not specified then the inner component is displayed by default.
+  const displayContainer = display === undefined || (chatLayout && display && display.includes(chatLayout))
   
   return (
     <CSSTransition
       in={chatLayout === ChatLayout.BUBBLE}
       timeout={400}
       classNames='floating-chat'>
-      <div className={`${styles.floatingBg} bubble shadow-sm p-2`}
+      <div className={`${styles.floatingBg} bubble shadow-sm p-2 ${displayContainer?'':'d-none'}`}
         style={{
-          ...(chatLayout === ChatLayout.FLOATING) ? position : {},
+          ...(chatLayout === ChatLayout.FLOATING) ? {...position, position: 'absolute'} : {},
+          ...(chatLayout === ChatLayout.BUBBLE) ? {position: 'fixed'} : {},
           backgroundColor: 'rgb(255,255,255, 0.1)'
         }}
         onMouseDown={handleOnMouseDown}
@@ -87,6 +85,7 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
       >
         {chatLayout !== ChatLayout.BUBBLE &&
         <>
+        {displayContainer}
           <ButtonGroup/>
           <Chat />
         </>
@@ -98,7 +97,8 @@ export const FloatingContainer = (props: FloatingContainerProps) => {
 }
 
 const mapStateToProps = (state: any) => ({
+  prevLayout: state.chat.prevLayout,
   chatLayout: selectChatLayout(state)
 })
 
-export default connect(mapStateToProps, null)(FloatingContainer)
+export default connect(mapStateToProps, null)(FloatingChat)

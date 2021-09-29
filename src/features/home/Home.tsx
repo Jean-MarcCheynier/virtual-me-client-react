@@ -4,26 +4,27 @@ import { connect } from 'react-redux';
 import { IAuthState } from '../auth/authSlice';
 import { CSSTransition } from 'react-transition-group';
 import { ChatLayout } from '../chat/chatSlice';
-import { FloatingContainer } from '../chat/FloatingContainer';
+import FloatingChat from '../chat/FloatingChatContainer';
+import { selectChatLayout } from './../chat/chatSlice';
 
 type HomeProps = {
   auth: IAuthState;
-  position: ChatLayout;
+  layout: ChatLayout;
 }
 
 
 const Home = (props: HomeProps) => {
-  const { position } = props;
+  const { layout } = props;
   
   return <Container fluid>
     <Row>
       <CSSTransition
-        in={position === ChatLayout.FIXED}
+        in={layout === ChatLayout.FIXED}
         timeout={500}
         unmountOnExit
         classNames='fade'>
         <Col className="d-xs-none" md="3" lg="4">
-          <FloatingContainer display={[ChatLayout.FIXED]}/>
+          <FloatingChat display={[ChatLayout.FIXED]}/>
         </Col>
       </CSSTransition>
       <Col >2 of 2</Col>
@@ -33,7 +34,7 @@ const Home = (props: HomeProps) => {
 
 const mapStateToProps = (state: any) => ({
   auth: state.auth,
-  position: state.chat.position
+  layout: selectChatLayout(state)
 })
 
 export default connect(mapStateToProps)(Home)
