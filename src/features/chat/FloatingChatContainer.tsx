@@ -34,8 +34,6 @@ export const FloatingChat = (props: FloatingChatProps) => {
   const dispatch = useDispatch();
   
   const whileMove = (e: any) => {
-    //console.info("while move");
-    //console.info(e);
     setPosition(position => ({
       ...position,
       left: e.pageX - offset.left,
@@ -45,7 +43,6 @@ export const FloatingChat = (props: FloatingChatProps) => {
   
 
   const endMove = () => {
-    //console.info("end move");
     window.removeEventListener('mousemove', whileMove);
     window.removeEventListener('mouseup', endMove);
   };
@@ -53,7 +50,6 @@ export const FloatingChat = (props: FloatingChatProps) => {
   // Trigger scroll on mousedown
   const handleOnMouseDown = (e: any) => {
     if (chatLayout === ChatLayout.FLOATING) {
-      //console.log(e)
       e.stopPropagation(); // remove if you do want it to propagate ..
       setOffset({ left: e.nativeEvent.layerX, top: e.nativeEvent.layerY })
       window.addEventListener('mousemove', whileMove);

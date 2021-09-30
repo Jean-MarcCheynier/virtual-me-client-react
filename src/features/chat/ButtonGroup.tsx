@@ -25,19 +25,19 @@ const ButtonGroup = (props: any) => {
     <div className="mb-2 d-flex flex-row-reverse">
       { chatLayout === ChatLayout.FIXED &&
       <>
-        <ButtonLight className="ml-1" onClick={setFloatting}>
+        <ButtonLight className="ml-1" onClick={setFloatting} id='chat.btn.layout.floating' tooltip='chat.btn.layout.floating'>
           <FaClone/>
         </ButtonLight >
-        <ButtonLight onClick={setBubble}>
+        <ButtonLight onClick={setBubble} id='chat.btn.layout.bubble' tooltip='chat.btn.layout.bubble'>
           <FaMinus/>
         </ButtonLight>
       </>}
       { chatLayout === ChatLayout.FLOATING &&
       <>
-        <ButtonLight className="pt-0 ml-1" onClick={setFix} >
+        <ButtonLight className="pt-0 ml-1" onClick={setFix} id='chat.btn.layout.fixed' tooltip='chat.btn.layout.fixed'>
           <FaExternalLinkSquareAlt />
         </ButtonLight >
-        <ButtonLight onClick={setBubble}>
+        <ButtonLight onClick={setBubble} id='chat.btn.layout.bubble' tooltip='chat.btn.layout.bubble'>
           <FaMinus />
         </ButtonLight >
       </>}

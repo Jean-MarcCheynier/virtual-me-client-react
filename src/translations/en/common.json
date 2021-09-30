@@ -23,6 +23,13 @@
       "error": {
         "unauthorized":"Hum it's seems your not authorized, please try to login"
       }
+    },
+    "btn": {
+      "layout": {
+        "fixed": "Attach chat window to the page",
+        "bubble": "Reduce chat",
+        "floating": "Detach chat window"
+      }
     } 
   }
 }
