@@ -11,12 +11,13 @@ import i18next from "i18next";
 import { BrowserRouter as Router } from "react-router-dom";
 
 
-import FloatingContainer from './features/chat/FloatingContainer';
+import FloatingChat from './features/chat/FloatingChatContainer';
 import Portal from './features/Portal';
 
 import common_fr from "./translations/fr/common.json";
 import common_en from "./translations/en/common.json";
 import WebSocketProvider from './features/ws/WebSocketProvider';
+import { ChatLayout } from './features/chat/chatSlice';
 
 
 i18next.init({
@@ -40,7 +41,7 @@ ReactDOM.render(
         <I18nextProvider i18n={i18next}>
           <Router>
             <Portal>
-              <FloatingContainer />
+              <FloatingChat display={[ChatLayout.BUBBLE, ChatLayout.FLOATING]}/>
             </Portal>
             <App />
           </Router>
