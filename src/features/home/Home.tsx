@@ -12,7 +12,6 @@ type HomeProps = {
   layout: ChatLayout;
 }
 
-
 const Home = (props: HomeProps) => {
   const { layout } = props;
   

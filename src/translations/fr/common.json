@@ -2,6 +2,29 @@
   "welcome": {
     "title": "Bienvenu à {{framework}}"
   },
+  "auth": {
+    "linkto": {
+      "signup": "Pas encore de compte? Inscris-toi",
+      "signin": "Déjà inscrit? Connecte-toi!"
+    }
+  },
+  "signup": {
+    "title": "S'enregistrer",
+    "form": {
+      "login": {
+        "placeholder": "Nom d'utilisateur"
+      },
+      "password": {
+        "placeholder": "Mot de passe"
+      },
+      "passwordCheck": {
+        "placeholder": "Confirmation"
+      },
+      "submit": {
+        "label": "Créer mon compte"
+      }
+    }
+  },
   "signin": {
     "title": "Se connecter",
     "form": {
@@ -12,7 +35,7 @@
         "placeholder": "Mot de passe"
       },
       "submit": {
-        "label": "Envoyer"
+        "label": "Connexion"
       }
     }
   },

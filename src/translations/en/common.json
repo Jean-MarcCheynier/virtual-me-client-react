@@ -2,6 +2,29 @@
   "welcome": {
     "title": "Welcome to {{framework}}"
   },
+  "auth": {
+    "linkto": {
+      "signup": "Create an account",
+      "signin": "Already have an account? Sign in"
+    }
+  },
+  "signup": {
+    "title": "signup",
+    "form": {
+      "login": {
+        "placeholder": "username"
+      },
+      "password": {
+        "placeholder": "password"
+      },
+      "passwordCheck": {
+        "placeholder": "confirm password"
+      },
+      "submit": {
+        "label": "Sign up"
+      }
+    }
+  }, 
   "signin": {
     "title": "signin",
     "form": {
@@ -12,7 +35,7 @@
         "placeholder": "password"
       },
       "submit": {
-        "label": "Login"
+        "label": "Sign in"
       }
     }
   },

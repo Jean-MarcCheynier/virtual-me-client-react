@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { useAppDispatch } from '../../app/hooks';
-import { signinAsync, /*signout*/ } from './authSlice';
+import { signupAsync, /*signout*/ } from './authSlice';
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useTranslation } from 'react-i18next';
@@ -9,9 +9,9 @@ import { RouteComponentProps } from 'react-router';
 
 
 
-function Signin(props: RouteComponentProps<{}, any, unknown> | any) {
+function Signup(props: RouteComponentProps<{}, any, unknown> | any) {
   const [t] = useTranslation('common');
-  const initialState = { login: '', password: '' };
+  const initialState = { login: '', password: '', passwordCheck: '' };
   const dispatch = useAppDispatch();
   const [form, setForm] = useState({ ...initialState});
   
@@ -25,7 +25,7 @@ function Signin(props: RouteComponentProps<{}, any, unknown> | any) {
     e.preventDefault();
     console.log(e);
     setForm({...initialState})
-    dispatch(signinAsync(form))
+    dispatch(signupAsync(form))
   }
   
   const handleOnChange = (e: any) => {
@@ -41,7 +41,7 @@ function Signin(props: RouteComponentProps<{}, any, unknown> | any) {
           name='login'
           value={form.login}
           as="input"
-          placeholder={t('signin.form.login.placeholder')}
+          placeholder={t('signup.form.login.placeholder')}
           />
       </Form.Group>
       <Form.Group className="mb-1" controlId="password">
@@ -51,14 +51,24 @@ function Signin(props: RouteComponentProps<{}, any, unknown> | any) {
           type='password'
           value={form.password}
           as="input"
-          placeholder={t('signin.form.password.placeholder')}
+          placeholder={t('signup.form.password.placeholder')}
+        />
+      </Form.Group>
+      <Form.Group className="mb-1" controlId="password-check">
+        <Form.Control
+          onChange={handleOnChange}
+          name='passwordCheck'
+          type='password'
+          value={form.passwordCheck}
+          as="input"
+          placeholder={t('signup.form.passwordCheck.placeholder')}
         />
       </Form.Group>
       <Form.Group controlId="password">
-        <Button className="w-100" type="submit">{t('signin.form.submit.label')}</Button>
+        <Button className="w-100" type="submit">{t('signup.form.submit.label')}</Button>
       </Form.Group>
     </Form>
     </>
 }
 
-export default Signin;
+export default Signup;

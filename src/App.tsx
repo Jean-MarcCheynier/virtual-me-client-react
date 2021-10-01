@@ -20,7 +20,7 @@ function App() {
         <CSSTransition
           timeout={300}
           classNames='fade'
-          key={location.key}
+          key={"plop"}
         >
           <Switch location={location}>
             <Route path="/" exact={true} component={Landing} />
