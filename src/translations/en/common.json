@@ -12,13 +12,24 @@
     "title": "signup",
     "form": {
       "login": {
-        "placeholder": "username"
+        "placeholder": "username",
+        "error": {
+          "required": "Username is required"
+        }
       },
       "password": {
-        "placeholder": "password"
+        "placeholder": "password",
+        "error": {
+          "tooShort": "Password don't match",
+          "required": "Password is required"
+        }
       },
       "passwordCheck": {
-        "placeholder": "confirm password"
+        "placeholder": "confirm password",
+        "error": {
+          "dontMatch": "Password should have at least 4 characters",
+          "required": "Password confirmation is required"
+        }
       },
       "submit": {
         "label": "Sign up"
@@ -36,8 +47,14 @@
       },
       "submit": {
         "label": "Sign in"
+      },
+      "error": {
+        "unauthorized": "Wrong credentials"
       }
     }
+  },
+  "menu": {
+    "signout": "Signout"
   },
   "chat": {
     "title":"chat",

@@ -1,64 +1,68 @@
-import { useState } from 'react'
-
 import { useAppDispatch } from '../../app/hooks';
 import { signinAsync, /*signout*/ } from './authSlice';
-import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 import { useTranslation } from 'react-i18next';
 import { RouteComponentProps } from 'react-router';
+import * as Yup from 'yup';
+import { Formik, Form, FormikProps, FormikHelpers } from 'formik';
+import { Form as BForm } from 'react-bootstrap';
+import FormikFieldControl from '../../components/custom/formik/FormikFieldControl';
+import { connect } from 'react-redux';
 
 
+const SigninSchema = Yup.object().shape({
+  login: Yup.string()
+    .required('signup.form.login.error.required'),
+  password: Yup.string()
+    .required('signup.form.password.error.required'),
+});
+
+interface Values {
+  login: string;
+  password: string;
+}
+
+const initialValues: Values = {
+  'login': '',
+  'password': ''
+}
 
 function Signin(props: RouteComponentProps<{}, any, unknown> | any) {
   const [t] = useTranslation('common');
-  const initialState = { login: '', password: '' };
   const dispatch = useAppDispatch();
-  const [form, setForm] = useState({ ...initialState});
+  const { status } = props;
   
-
-  // const handleOnSignout = () => {
-  //   dispatch(signout())
-  // }
-  
-  
-  const handleOnSubmit = (e: any) => {
-    e.preventDefault();
-    console.log(e);
-    setForm({...initialState})
-    dispatch(signinAsync(form))
-  }
-  
-  const handleOnChange = (e: any) => {
-    const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+  const handleOnSubmit = (values: Values, { setSubmitting }: FormikHelpers<Values>) => {
+    dispatch(signinAsync(values))
   }
 
-  return <>
-    <Form onSubmit={handleOnSubmit}>
-      <Form.Group className="mb-1" controlId="login">
-        <Form.Control
-          onChange={handleOnChange}
-          name='login'
-          value={form.login}
-          as="input"
-          placeholder={t('signin.form.login.placeholder')}
-          />
-      </Form.Group>
-      <Form.Group className="mb-1" controlId="password">
-        <Form.Control
-          onChange={handleOnChange}
-          name='password'
-          type='password'
-          value={form.password}
-          as="input"
-          placeholder={t('signin.form.password.placeholder')}
-        />
-      </Form.Group>
-      <Form.Group controlId="password">
-        <Button className="w-100" type="submit">{t('signin.form.submit.label')}</Button>
-      </Form.Group>
-    </Form>
-    </>
+  return (
+    <Formik
+      initialValues={initialValues}
+      onSubmit={handleOnSubmit}
+      validationSchema={SigninSchema}
+    >
+      {({ isSubmitting, errors, touched, isValid }: FormikProps<Values>) => (
+        <Form>
+          <FormikFieldControl errors={errors} touched={touched} name="login" placeholder={t('signin.form.login.placeholder')} />
+          <FormikFieldControl errors={errors} touched={touched} type="password" name="password" placeholder={t('signin.form.password.placeholder')} />
+
+          {(status === 'error') &&
+            <BForm.Group>
+            <BForm.Text className="text-danger">
+              {t('signin.form.error.unauthorized')}
+            </BForm.Text>
+          </BForm.Group>}
+          <BForm.Group>
+            <Button className="w-100" type="submit">{t('signin.form.submit.label')}</Button>
+          </BForm.Group>
+        </Form>)}
+    </Formik> )
+
 }
 
-export default Signin;
+const mapStateToProps = (state: any) => ({
+  status: state.auth.signin.status
+})
+
+export default connect(mapStateToProps, null)(Signin);

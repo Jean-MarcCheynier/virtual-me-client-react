@@ -6,13 +6,24 @@ import { IUser, Role } from '@virtual-me/virtual-me-ts-core';
 
 export interface IAuthState {
   token?: any;
-  role?: Role
-  status: string
+  role?: Role;
+  signin?: {
+    status: string
+  },
+  signup?: {
+    status: string
+  }
+
 }
 
 const getInitialState: () => IAuthState = () => {
   let state: IAuthState = {
-    status: 'idle'
+    signin: {
+      status: 'idle'
+    },
+    signup: {
+      status: 'idle'
+    }
   }
   const strSession = window.sessionStorage.getItem('virtualMe');
   if (strSession) {
@@ -77,13 +88,13 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(signinAsync.pending, (state, { meta }) => {
-        return { status: 'loading' };
+        return { signin: { status: 'loading' }};
       })
       .addCase(signinAsync.fulfilled, (state, action: PayloadAction<IUser>) => {
-        return { ...state, status: 'idle', ...action.payload }
+        return { ...state, signin: { status: 'idle' }, ...action.payload }
       })
       .addCase(signinAsync.rejected, (state, { meta }) => {
-        return { status: 'error' }
+        return { signin: { status: 'error' } }
       })
       .addCase(geMeAsync.fulfilled, (state, action: PayloadAction<any>) => {
         return { ...state }

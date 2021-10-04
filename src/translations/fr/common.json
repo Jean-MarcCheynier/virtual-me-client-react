@@ -12,13 +12,24 @@
     "title": "S'enregistrer",
     "form": {
       "login": {
-        "placeholder": "Nom d'utilisateur"
+        "placeholder": "Nom d'utilisateur",
+        "error": {
+          "required": "Le nom d'utilisateur est requis"
+        }
       },
       "password": {
-        "placeholder": "Mot de passe"
+        "placeholder": "Mot de passe",
+        "error": {
+          "tooShort": "Le mot de passe faire plus de 4 caractères",
+          "required": "Le mot de passe est requis"
+        }
       },
       "passwordCheck": {
-        "placeholder": "Confirmation"
+        "placeholder": "Confirmation",
+        "error": {
+          "dontMatch": "Les mots de passe ne sont pas identiques",
+          "required": "Cofirmation du mot de passe requise"
+        }
       },
       "submit": {
         "label": "Créer mon compte"
@@ -36,8 +47,14 @@
       },
       "submit": {
         "label": "Connexion"
+      },
+      "error": {
+        "unauthorized": "Nom d'utilisateur ou mot de passe erroné"
       }
     }
+  },
+  "menu": {
+    "signout": "Se déconnecter"
   },
   "chat": {
     "title": "chat",

@@ -1,6 +1,5 @@
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
-import Signin from '../auth/Signin';
 import { connect } from 'react-redux';
 import Auth from './../auth/Auth';
 
