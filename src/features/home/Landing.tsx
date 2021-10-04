@@ -1,17 +1,17 @@
 import React from 'react';
 import { useEffect } from 'react';
-import { useHistory } from 'react-router';
+import { useHistory, useParams } from 'react-router';
 import { Container } from 'react-bootstrap';
 import CSSI18n from '../../components/I18N/CSSI18n';
 import { TypeWriterBlock, TypeWriterContainer } from '../../components/typeWriter/TypeWriter';
 
 function Landing() {
   const history = useHistory();
+  const {lang} = useParams<{lang: string}>();
   
   useEffect(() => {
     const onKeyDownListener = (e: any) => {
-      console.log("ok")
-      history.push('/home')
+      history.push(`/${lang}/home`)
     }
     setTimeout(() => {
       document.addEventListener('keydown', onKeyDownListener);
@@ -22,7 +22,7 @@ function Landing() {
       document.removeEventListener('keydown', onKeyDownListener);
       document.removeEventListener('click', onKeyDownListener);
     }
-  }, [history]);
+  }, [history, lang]);
   
   return <Container>
     <TypeWriterContainer className='text-primary'>

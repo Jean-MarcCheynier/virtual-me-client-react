@@ -2,6 +2,7 @@ import {
   useLocation,
   Switch,
   Route,
+  Redirect
 } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Signin from './features/auth/Signin';
@@ -15,7 +16,7 @@ function App() {
   const location = useLocation()
   
   return (
-    <div>
+    <div lang="">
       <TransitionGroup>
         <CSSTransition
           timeout={300}
@@ -23,9 +24,10 @@ function App() {
           key={"plop"}
         >
           <Switch location={location}>
-            <Route path="/" exact={true} component={Landing} />
-            <Route path="/home" component={Home} />
-            <Route path="/signin" component={Signin} />
+            <Route exact path={["/", "/:lang"]}><Redirect to="/en/home"/></Route>
+            <Route path="/:lang/landing" exact={true} component={Landing} />
+            <Route path="/:lang/home" component={Home} />
+            <Route path="/:lang/signin" component={Signin} />
           </Switch>
         </CSSTransition>
       </TransitionGroup>
