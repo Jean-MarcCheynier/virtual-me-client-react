@@ -21,10 +21,11 @@ function App() {
         <CSSTransition
           timeout={300}
           classNames='fade'
-          key={"plop"}
+          key={"id"}
         >
           <Switch location={location}>
-            <Route exact path={["/", "/:lang"]}><Redirect to="/en/home"/></Route>
+            <Route exact path="/"><Redirect to="/en" /></Route>
+            <Route exact path="/:lang"><Redirect to="/:lang/home"/></Route>
             <Route path="/:lang/landing" exact={true} component={Landing} />
             <Route path="/:lang/home" component={Home} />
             <Route path="/:lang/signin" component={Signin} />

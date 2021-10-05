@@ -82,7 +82,6 @@ export const FloatingChat = (props: FloatingChatProps) => {
       >
         {chatLayout !== ChatLayout.BUBBLE &&
         <>
-        {displayContainer}
           <ButtonGroup/>
           <Chat />
         </>
