@@ -6,13 +6,24 @@ import { IUser, Role } from '@virtual-me/virtual-me-ts-core';
 
 export interface IAuthState {
   token?: any;
-  role?: Role
-  status: string
+  role?: Role;
+  signin?: {
+    status: string
+  },
+  signup?: {
+    status: string
+  }
+
 }
 
 const getInitialState: () => IAuthState = () => {
   let state: IAuthState = {
-    status: 'idle'
+    signin: {
+      status: 'idle'
+    },
+    signup: {
+      status: 'idle'
+    }
   }
   const strSession = window.sessionStorage.getItem('virtualMe');
   if (strSession) {
@@ -40,11 +51,8 @@ export const geMeAsync = createAsyncThunk(
 
 export const signinAsync = createAsyncThunk(
   'auth/signin',
-  async (payload: { login: string, password: string }) => {
-    const response = await signin(payload)
-      .then(response => {
-        return response;
-      });
+  async (payload: { login: string, password: string }, thunkAPI) => {
+    const response = await signin(payload).catch(e => { throw thunkAPI.rejectWithValue(e) });
     window.sessionStorage.setItem('virtualMe', JSON.stringify(response.data));
     return response.data;
   }
@@ -52,8 +60,8 @@ export const signinAsync = createAsyncThunk(
 
 export const signupAsync = createAsyncThunk(
   'auth/signup',
-  async (payload: { login: string, password: string }) => {
-    const response = await signup(payload);
+  async (payload: { login: string, password: string }, thunkAPI) => {
+    const response = await signup(payload).catch(e => { throw thunkAPI.rejectWithValue(e) });
     return response;
   }
 );
@@ -77,18 +85,27 @@ export const authSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(signinAsync.pending, (state, { meta }) => {
-        return { status: 'loading' };
+        return { ...state, signin: { status: 'loading' } };
       })
       .addCase(signinAsync.fulfilled, (state, action: PayloadAction<IUser>) => {
-        return { ...state, status: 'idle', ...action.payload }
+        return { ...state, signin: { status: 'idle' }, ...action.payload }
       })
-      .addCase(signinAsync.rejected, (state, { meta }) => {
-        return { status: 'error' }
+      .addCase(signinAsync.rejected, (state, action: PayloadAction<any>) => {
+        return { ...state, signin: { status: 'error', error: action.payload } }
+      })
+      .addCase(signupAsync.pending, (state, { meta }) => {
+        return { ...state, signup: { status: 'loading' } }
+      })
+      .addCase(signupAsync.fulfilled, (state, action: PayloadAction<any>) => {
+        return { ...state, signup: { status: 'idle' }, ...action.payload }
+      })
+      .addCase(signupAsync.rejected, (state, action: PayloadAction<any>) => {
+        return { ...state, signup: { status: 'error', error: action.payload } }
       })
       .addCase(geMeAsync.fulfilled, (state, action: PayloadAction<any>) => {
         return { ...state }
       })
-      .addCase(geMeAsync.rejected, (state, { meta }) => {
+      .addCase(geMeAsync.rejected, (state, { meta, payload }) => {
         return getInitialState();
       });
   },

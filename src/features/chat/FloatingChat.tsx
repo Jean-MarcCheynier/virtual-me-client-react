@@ -73,7 +73,8 @@ export const FloatingChat = (props: FloatingChatProps) => {
       <div className={`${styles.floatingBg} bubble shadow-sm p-2 ${displayContainer?'':'d-none'}`}
         style={{
           ...(chatLayout === ChatLayout.FLOATING) ? {...position, position: 'absolute'} : {},
-          ...(chatLayout === ChatLayout.BUBBLE) ? {position: 'fixed'} : {},
+          ...(chatLayout === ChatLayout.BUBBLE) ? { position: 'fixed' } : {},
+          ...(chatLayout === ChatLayout.FIXED) ? { height: '100vh' } : {},
           backgroundColor: 'rgb(255,255,255, 0.1)'
         }}
         onMouseDown={handleOnMouseDown}

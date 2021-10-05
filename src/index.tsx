@@ -7,11 +7,12 @@ import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
 import { I18nextProvider } from "react-i18next";
 import i18next from "i18next";
+import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { BrowserRouter as Router } from "react-router-dom";
 
 
-import FloatingChat from './features/chat/FloatingChatContainer';
+import FloatingChat from './features/chat/FloatingChat';
 import Portal from './features/Portal';
 
 import common_fr from "./translations/fr/common.json";
@@ -20,10 +21,14 @@ import WebSocketProvider from './features/ws/WebSocketProvider';
 import { ChatLayout } from './features/chat/chatSlice';
 
 
-i18next.init({
+i18next
+  .use(LanguageDetector)
+  .init({
+    detection: {
+      order: ['htmlTag', 'path'],
+      lookupFromPathIndex: 0
+    },
   interpolation: { escapeValue: false },  // React already does escaping
-  lng: "fr", // if you're using a language detector, do not define the lng option
-  fallbackLng: "fr",                             // language to use
   resources: {
     en: {
       common: common_en               // 'common' is our custom namespace
@@ -32,7 +37,11 @@ i18next.init({
       common: common_fr
     },
   },
-});
+  whitelist: ['en', 'fr'],
+  });
+
+document.documentElement.lang = i18next.language;
+i18next.on('languageChanged', (lng) => { console.log('langChanged'); document.documentElement.setAttribute('lang', lng); })
 
 ReactDOM.render(
   <React.StrictMode>

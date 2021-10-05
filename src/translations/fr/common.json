@@ -2,6 +2,44 @@
   "welcome": {
     "title": "Bienvenu à {{framework}}"
   },
+  "auth": {
+    "linkto": {
+      "signup": "Pas encore de compte? Inscris-toi",
+      "signin": "Déjà inscrit? Connecte-toi!"
+    }
+  },
+  "signup": {
+    "title": "S'enregistrer",
+    "form": {
+      "login": {
+        "placeholder": "Nom d'utilisateur",
+        "error": {
+          "required": "Le nom d'utilisateur est requis"
+        }
+      },
+      "password": {
+        "placeholder": "Mot de passe",
+        "error": {
+          "tooShort": "Le mot de passe faire plus de 4 caractères",
+          "required": "Le mot de passe est requis"
+        }
+      },
+      "passwordCheck": {
+        "placeholder": "Confirmation",
+        "error": {
+          "dontMatch": "Les mots de passe ne sont pas identiques",
+          "required": "Cofirmation du mot de passe requise"
+        }
+      },
+      "submit": {
+        "label": "Créer mon compte"
+      },
+      "error": {
+        "400": "Ce nom d'utilisateur déjà pris",
+        "default": "Impossible de se connecter, veillez réessayer plus tard."
+      }
+    }
+  },
   "signin": {
     "title": "Se connecter",
     "form": {
@@ -12,9 +50,15 @@
         "placeholder": "Mot de passe"
       },
       "submit": {
-        "label": "Envoyer"
+        "label": "Connexion"
+      },
+      "error": {
+        "unauthorized": "Nom d'utilisateur ou mot de passe erroné"
       }
     }
+  },
+  "menu": {
+    "signout": "Se déconnecter"
   },
   "chat": {
     "title": "chat",
