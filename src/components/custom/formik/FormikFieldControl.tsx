@@ -7,15 +7,11 @@ export default function FormikFieldControl(props: FieldAttributes<any>) {
   const { errors, touched, name, ...other } = props;
   const [t] = useTranslation('common');
   
-  const showValid = !errors[name] && touched[name]
-  const showInvalid = errors[name] && touched[name]
+  return <Form.Group className="mb-1" controlId={name}>
+    <Field isInvalid={touched[name] && !!errors[name]} name={name} {...other} as={Form.Control} />
+    <Form.Control.Feedback type="invalid">
+      {t(errors[name])}
+    </Form.Control.Feedback>
+  </Form.Group>
   
-  return <Form.Group className="mb-1" controlId="login">
-    <Field className={`${showValid && 'is-valid'} ${showInvalid ? 'is-invalid' : ''}`} name={name} {...other}  as={Form.Control} />
-    {errors[name] && touched[name] ? (
-      <Form.Text className="text-danger">
-        {t(errors[name])}
-      </Form.Text>
-    ) : null}
-    </Form.Group>
 }

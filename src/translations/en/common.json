@@ -4,8 +4,8 @@
   },
   "auth": {
     "linkto": {
-      "signup": "Create an account",
-      "signin": "Already have an account? Sign in"
+      "signup": "Not yet registered? Create an account!",
+      "signin": "Already have an account? Sign in!"
     }
   },
   "signup": {
@@ -20,19 +20,23 @@
       "password": {
         "placeholder": "password",
         "error": {
-          "tooShort": "Password don't match",
+          "tooShort": "Password should have at least 4 characters",
           "required": "Password is required"
         }
       },
       "passwordCheck": {
         "placeholder": "confirm password",
         "error": {
-          "dontMatch": "Password should have at least 4 characters",
+          "dontMatch": "Passwords don't match",
           "required": "Password confirmation is required"
         }
       },
       "submit": {
         "label": "Sign up"
+      },
+      "error": {
+        "400": "Username already taken",
+        "default":"Could not connect to the server"
       }
     }
   }, 

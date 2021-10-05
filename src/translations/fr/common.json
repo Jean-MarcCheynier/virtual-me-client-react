@@ -33,6 +33,10 @@
       },
       "submit": {
         "label": "Créer mon compte"
+      },
+      "error": {
+        "400": "Ce nom d'utilisateur déjà pris",
+        "default": "Impossible de se connecter, veillez réessayer plus tard."
       }
     }
   },
