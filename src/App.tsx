@@ -25,7 +25,8 @@ function App() {
         >
           <Switch location={location}>
             <Route exact path="/"><Redirect to="/en" /></Route>
-            <Route exact path="/:lang"><Redirect to="/:lang/home"/></Route>
+            <Route exact path="/:lang" render={props => (
+              <Redirect to={`/${props.match.params.lang}/home/`} />)} />
             <Route path="/:lang/landing" exact={true} component={Landing} />
             <Route path="/:lang/home" component={Home} />
             <Route path="/:lang/signin" component={Signin} />

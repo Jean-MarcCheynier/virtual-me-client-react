@@ -5,8 +5,9 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import { I18nextProvider } from "react-i18next";
-import i18next from "i18next";
+import { I18nextProvider, initReactI18next } from "react-i18next";
+import Backend from 'i18next-http-backend';
+import i18n from "i18next";
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { BrowserRouter as Router } from "react-router-dom";
@@ -21,33 +22,41 @@ import WebSocketProvider from './features/ws/WebSocketProvider';
 import { ChatLayout } from './features/chat/chatSlice';
 
 
-i18next
-  .use(LanguageDetector)
+//import i18nhttp from 'i18next-http-backend'
+//import Backend from 'i18next-chained-backend'
+
+i18n.use(LanguageDetector)
+  .use(Backend)
+  .use(initReactI18next)
   .init({
     detection: {
       order: ['htmlTag', 'path'],
       lookupFromPathIndex: 0
     },
-  interpolation: { escapeValue: false },  // React already does escaping
-  resources: {
-    en: {
-      common: common_en               // 'common' is our custom namespace
+    interpolation: { escapeValue: false },  // React already does escaping
+    react: {
+      useSuspense: true
     },
-    fr: {
-      common: common_fr
+    resources: {
+      en: {
+        common: common_en               // 'common' is our custom namespace
+      },
+      fr: {
+        common: common_fr
+      },
     },
-  },
+    fallbackLng: 'en',
   whitelist: ['en', 'fr'],
   });
 
-document.documentElement.lang = i18next.language;
-i18next.on('languageChanged', (lng) => { console.log('langChanged'); document.documentElement.setAttribute('lang', lng); })
+document.documentElement.lang = i18n.language;
+i18n.on('languageChanged', (lng) => { console.log('langChanged'); document.documentElement.setAttribute('lang', lng); })
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
       <WebSocketProvider>
-        <I18nextProvider i18n={i18next}>
+        <I18nextProvider i18n={i18n}>
           <Router>
             <Portal>
               <FloatingChat display={[ChatLayout.BUBBLE, ChatLayout.FLOATING]}/>

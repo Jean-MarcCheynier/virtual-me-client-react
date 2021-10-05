@@ -12,6 +12,10 @@
   scrollbar-width: none;  /* Firefox */
 }
 
+.fixScrollableList {
+  height: calc(100vh - 200px);
+}
+
 .topShadow {
   position: absolute;
   z-index: 1; 

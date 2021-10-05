@@ -62,7 +62,7 @@ export const signupAsync = createAsyncThunk(
   'auth/signup',
   async (payload: { login: string, password: string }, thunkAPI) => {
     const response = await signup(payload).catch(e => { throw thunkAPI.rejectWithValue(e) });
-    return response;
+    return response.data;
   }
 );
 

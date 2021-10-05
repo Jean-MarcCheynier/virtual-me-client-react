@@ -56,7 +56,10 @@ export const chatSlice = createSlice({
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    setLayout: (state, action) => ({ ...state, prevLayout: state.layout , layout: action.payload }),
+    setLayout: (state, action) => {
+      const prevLayout = state.layout;
+      return { ...state, prevLayout: prevLayout, layout: action.payload }
+    },
     restoreLayout: (state ) =>({...state, layout: state.prevLayout}),
     sendMessage: (state, action) => {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It

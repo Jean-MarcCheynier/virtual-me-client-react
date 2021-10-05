@@ -2,7 +2,7 @@ import React from 'react';
 import Signin from './Signin';
 import Signup from './Signup';
 import { useTranslation } from 'react-i18next';
-import { Link, Route, Switch, useRouteMatch, useParams, useLocation } from 'react-router-dom';
+import { Link, Route, Switch, useLocation } from 'react-router-dom';
 
 const Auth = function() {
 
@@ -13,7 +13,7 @@ const Auth = function() {
 
     return ( <div>
         <Switch>
-            <Route path='/:lang/home/signup'>
+            <Route path={`/${lang}/home/signup`}>
                 <Signup/>
                 <div className="my-1 text-end text-primary">
                     <Link to={`/${lang}/home/signin`}>{t('auth.linkto.signin')}</Link>
@@ -26,9 +26,7 @@ const Auth = function() {
                 </div>
             </Route>
         </Switch>
-    </div>
-
-    )
+    </div>)
 }
 
 export default Auth;

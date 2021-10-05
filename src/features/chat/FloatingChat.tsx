@@ -85,8 +85,7 @@ export const FloatingChat = (props: FloatingChatProps) => {
           <ButtonGroup/>
           <Chat />
         </>
-        }
-            
+        }   
       </div>
         
     </CSSTransition>)
