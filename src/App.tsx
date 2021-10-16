@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import {
   useLocation,
   Switch,
@@ -8,12 +9,27 @@ import { TransitionGroup, CSSTransition } from 'react-transition-group'
 import Signin from './features/auth/Signin';
 import Landing from './features/home/Landing';
 import Home from './features/home/Home';
+import { WebSocketContext } from "./features/ws/WebSocketProvider";
 
 
 
 function App() {
-  
+
   const location = useLocation()
+  const ws: any = WebSocketContext;
+  
+  useEffect(() => {
+    console.log("CONTEXT");
+    if (ws && ws.socket) {
+      console.log("init");
+      ws.socket.on("changeLang", () => {
+        console.log("langChanged");
+        //console.log(params);
+        console.log(location);
+      });
+    }
+
+  }, [ws])
   
   return (
     <div lang="">
