@@ -2,6 +2,7 @@ import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import chatReducer from '../features/chat/chatSlice';
 import authReducer from '../features/auth/authSlice';
+import preferencesReducer from '../features/preferences/preferencesSlice';
 import { VirtualMeAPI } from '../app/axios'
 
 export const store = configureStore({
@@ -9,6 +10,7 @@ export const store = configureStore({
     auth: authReducer,
     chat: chatReducer,
     counter: counterReducer,
+    preferences: preferencesReducer,
   },
 });
 VirtualMeAPI.initInterceptor(store);

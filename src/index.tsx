@@ -30,7 +30,7 @@ i18n.use(LanguageDetector)
   .use(initReactI18next)
   .init({
     detection: {
-      order: ['htmlTag', 'path'],
+      order: ['path'],
       lookupFromPathIndex: 0
     },
     interpolation: { escapeValue: false },  // React already does escaping
@@ -46,11 +46,14 @@ i18n.use(LanguageDetector)
       },
     },
     fallbackLng: 'en',
-  whitelist: ['en', 'fr'],
+    whitelist: ['en', 'fr'],
   });
 
 document.documentElement.lang = i18n.language;
-i18n.on('languageChanged', (lng) => { console.log('langChanged'); document.documentElement.setAttribute('lang', lng); })
+i18n.on('languageChanged', (lng) => { 
+  console.log('langChanged'); 
+  document.documentElement.setAttribute('lang', lng); 
+})
 
 ReactDOM.render(
   <React.StrictMode>

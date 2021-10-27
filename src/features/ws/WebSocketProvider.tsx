@@ -1,10 +1,11 @@
 import React, { createContext, useMemo, useEffect } from 'react'
-import { connect } from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
+import { setLang } from '../preferences/preferencesSlice';
 //import { useDispatch, Provider } from 'react-redux';
 import { getSocket } from './socketUtil';
 
-const WebSocketContext = createContext(null)
+const WebSocketContext = createContext({ socket: null })
 export { WebSocketContext }
 
 
@@ -16,17 +17,31 @@ type WebSocketProviderProps = {
 function WebSocketProvider(props: WebSocketProviderProps) {
 
   const { children, auth } = props;
+  const dispatch = useDispatch();
   //const location = useLocation();
   //const params = useParams();
   
-  const ws = useMemo(() => {
+  const ws: any = useMemo(() => {
     if (auth.jwt) {
-      console.info("WebSocketProvider socket initialization")
+      console.info("WebSocketProvider socket initialization");
       return { socket: getSocket(auth.jwt) }
     } else {
       return {};
     }
   }, [auth.jwt]);
+
+  //Init socket actions once ws is initialized
+  useEffect(() => {
+    if(ws.socket) {
+      ws.socket.on("changeLang", (lang: any) => {
+        console.log("langChanged");
+        console.log(lang);
+        dispatch(setLang(lang))
+        });
+
+    }
+
+  }, [ws]) 
   
   const sendMessage = (roomId: string, message: string) => {
     const payload = {
@@ -44,7 +59,7 @@ function WebSocketProvider(props: WebSocketProviderProps) {
 
 
   
-  return <WebSocketContext.Provider value={(ws !== null)?ws:{} } >
+  return <WebSocketContext.Provider value={ ws } >
     { children }
     </WebSocketContext.Provider> 
     
