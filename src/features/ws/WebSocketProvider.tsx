@@ -1,6 +1,5 @@
 import React, { createContext, useMemo, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux';
-import { useLocation, useParams } from 'react-router-dom';
 import { setLang } from '../preferences/preferencesSlice';
 //import { useDispatch, Provider } from 'react-redux';
 import { getSocket } from './socketUtil';
@@ -41,8 +40,9 @@ function WebSocketProvider(props: WebSocketProviderProps) {
 
     }
 
-  }, [ws]) 
+  }, [ws, dispatch])
   
+/** 
   const sendMessage = (roomId: string, message: string) => {
     const payload = {
       roomId: roomId,
@@ -51,6 +51,7 @@ function WebSocketProvider(props: WebSocketProviderProps) {
     //socket.emit("event://send-message", JSON.stringify(payload));
     //dispatch(updateChatLog(payload));
   }
+  */
   
 /*   const ws: any = {
     socket: socket,

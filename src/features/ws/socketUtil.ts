@@ -1,6 +1,4 @@
 import { io } from "socket.io-client";
-import { useDispatch } from 'react-redux';
-import { setLang } from "../preferences/preferencesSlice";
 
 
 console.log("WS connect");

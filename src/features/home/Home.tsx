@@ -7,6 +7,8 @@ import { ChatLayout } from '../chat/chatSlice';
 import FloatingChat from '../chat/FloatingChat';
 import { selectChatLayout } from './../chat/chatSlice';
 import Signout from '../auth/Signout';
+import { Route, Switch, useRouteMatch } from 'react-router';
+import CV from '../cv/CV';
 
 type HomeProps = {
   auth: IAuthState;
@@ -15,6 +17,7 @@ type HomeProps = {
 
 const Home = (props: HomeProps) => {
   const { layout } = props;
+  let { path, url } = useRouteMatch();
   
   return <Container fluid>
     <Signout/>
@@ -28,7 +31,16 @@ const Home = (props: HomeProps) => {
           <FloatingChat display={[ChatLayout.FIXED]}/>
         </Col>
       </CSSTransition>
-      <Col >2 of 2</Col>
+      <Col >
+        <Switch>
+          <Route exact path={`${path}/cv`}>
+            <CV/>
+          </Route>
+          <Route exact path={path}>
+            plop
+          </Route>
+        </Switch>
+      </Col>
     </Row>
   </Container>
 }

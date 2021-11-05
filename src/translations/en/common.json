@@ -2,6 +2,10 @@
   "welcome": {
     "title": "Welcome to {{framework}}"
   },
+  "CV": {
+    "bornIn": "Born in ",
+    "citizenship": "Citizenship"
+  },
   "auth": {
     "linkto": {
       "signup": "Not yet registered? Create an account!",

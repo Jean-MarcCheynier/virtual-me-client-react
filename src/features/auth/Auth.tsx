@@ -13,16 +13,16 @@ const Auth = function() {
 
     return ( <div>
         <Switch>
-            <Route path={`/${lang}/home/signup`}>
+            <Route path={`/${lang}/signup`}>
                 <Signup/>
                 <div className="my-1 text-end text-primary">
-                    <Link to={`/${lang}/home/signin`}>{t('auth.linkto.signin')}</Link>
+                    <Link to={`/${lang}/signin`}>{t('auth.linkto.signin')}</Link>
                 </div>
             </Route>
             <Route path={[`/:lang/home/signin`, `/:lang/home`]}>
                 <Signin/>
                 <div className="my-1 text-end text-primary">
-                    <Link to={`/${lang}/home/signup`}>{t('auth.linkto.signup')}</Link>
+                    <Link to={`/${lang}/signup`}>{t('auth.linkto.signup')}</Link>
                 </div>
             </Route>
         </Switch>

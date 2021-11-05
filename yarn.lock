@@ -2180,10 +2180,10 @@
     "@typescript-eslint/types" "4.15.2"
     eslint-visitor-keys "^2.0.0"
 
-"@virtual-me/virtual-me-ts-core@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@virtual-me/virtual-me-ts-core/-/virtual-me-ts-core-1.0.8.tgz#e42210e06048061716a3487db876e74907356d04"
-  integrity sha512-DmiPU4yaDKZevmdysM+ZJI+d0SjCngpSJvfqElsiTUvE6ydbl//Y7nTs2r3c7OewuEKbRv7Jw0IL5Co0MCok/g==
+"@virtual-me/virtual-me-ts-core@^1.0.24":
+  version "1.0.24"
+  resolved "https://registry.yarnpkg.com/@virtual-me/virtual-me-ts-core/-/virtual-me-ts-core-1.0.24.tgz#8577ac193f2e6fc07015b8d626a6ef08c17b8bf4"
+  integrity sha512-l5J5Ii5HQMYdsp2e4SP0Qe93pZX1AiFPjrdKZM4ZdwHKhxmuWeXQoG86kv34O26/118Mw3EnIFZmX1bMIEjQIQ==
 
 "@webassemblyjs/ast@1.9.0":
   version "1.9.0"
@@ -6272,6 +6272,11 @@ internal-slot@^1.0.3:
     get-intrinsic "^1.1.0"
     has "^1.0.3"
     side-channel "^1.0.4"
+
+intl@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/intl/-/intl-1.2.5.tgz#82244a2190c4e419f8371f5aa34daa3420e2abde"
+  integrity sha1-giRKIZDE5Bn4Nx9ao02qNCDiq94=
 
 invariant@^2.2.4:
   version "2.2.4"
