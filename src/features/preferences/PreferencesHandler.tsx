@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import i18n from "i18next";
-import { useParams } from 'react-router';
 
 interface PreferencesProps{
     lang?: string
@@ -22,7 +21,7 @@ const PreferencesHandler = (props: PreferencesProps) => {
         if (lang) {
             const urlLang = location.pathname.split('/')[1]
             if (lang !== urlLang) {
-                const newLoc = location.pathname.replace(new RegExp(/(\/)(.+)(\/.*)/), `$1${lang}$3`)
+                const newLoc = location.pathname.replace(new RegExp(/(\/)([^/]*)(\/.*)/), `$1${lang}$3`)
                 history.push(newLoc);
             }
             if (lang !== i18n.language) {

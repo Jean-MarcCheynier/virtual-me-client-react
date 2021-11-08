@@ -17,7 +17,7 @@ type HomeProps = {
 
 const Home = (props: HomeProps) => {
   const { layout } = props;
-  let { path, url } = useRouteMatch();
+  let { path } = useRouteMatch();
   
   return <Container fluid>
     <Signout/>

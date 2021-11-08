@@ -1,7 +1,7 @@
 import React from 'react';
 import { IInfo } from '@virtual-me/virtual-me-ts-core'
 import { connect } from 'react-redux';
-import { Container, Row, Col, Image } from 'react-bootstrap';
+import { Row, Col, Image } from 'react-bootstrap';
 import Translate from './Translate';
 import { ContactType, IContact, IContactEmail, IContactPhone, IContactPost, IContactSocialNetwork} from '@virtual-me/virtual-me-ts-core/lib/Cv/Contact';
 import { ContactEmail, ContactPhone, ContactPost, ContactSocialNetwork } from './Contact';
@@ -19,8 +19,7 @@ const Info: React.FC<IInfoProps> = (props: IInfoProps) => {
   const [t] = useTranslation('common');
   
   return <>
-    {infos &&
-      <Container className="py-3">
+    {infos && <>
       <Row>
         <Col className="text-center">
           <Image src={`${process.env.PUBLIC_URL}/me.jpeg`} style={{width: '50vw', maxWidth: '250px'}} roundedCircle />
@@ -32,33 +31,39 @@ const Info: React.FC<IInfoProps> = (props: IInfoProps) => {
           <p>
             {`${infos.name}`}<br />
             {`${infos.surname}`}<br />
-            {t('CV.bornIn')}: {new Intl.DateTimeFormat(lang).format(new Date(infos.dateOfBirth))}<br/>
-            {t('CV.citizenship')}: <Translate translation={infos.citizenship.translation}/>
+            {t('CV.infos.bornIn')}: {new Intl.DateTimeFormat(lang).format(new Date(infos.dateOfBirth))}<br/>
+            {t('CV.infos.citizenship')}: <Translate translation={infos.citizenship.translation}/>
           </p>
         </Col>
       </Row>
       <Row>
-        {infos.contact.map((item: IContact) => {   
+        {infos.contact.map((item: IContact) => {
+            let el;
             switch (item.type) {
               case ContactType.EMAIL:
                 const contactEmail = item as IContactEmail;
-                return <ContactEmail contact={contactEmail}/>;
+                el = <ContactEmail contact={contactEmail} />;
+                break;
               case ContactType.PHONE:
                 const contactPhone = item as IContactPhone;
-                return <ContactPhone contact={contactPhone} />;
+                el = <ContactPhone contact={contactPhone} />;
+                break;
               case ContactType.SOCIAL_NETWORK:
                 const contactSN = item as IContactSocialNetwork;
-                return <ContactSocialNetwork contact={contactSN} />;
+                el = <ContactSocialNetwork contact={contactSN} />;
+                break;
               case ContactType.POST:
                 const contactPost = item as IContactPost;
-                return <ContactPost contact={contactPost} />;
+                el = <ContactPost contact={contactPost} />;
+                break;
               default:
+                el = <></>
                 break;
             }
-          }
-          )}
+            return el;
+          })}
       </Row>
-    </Container>
+    </>
     }
     </>;
   

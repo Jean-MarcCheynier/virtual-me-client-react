@@ -3,8 +3,54 @@
     "title": "Welcome to {{framework}}"
   },
   "CV": {
-    "bornIn": "Born in ",
-    "citizenship": "Citizenship"
+    "infos": {
+      "bornIn": "Date of birth ",
+      "citizenship": "Citizenship"
+    },
+    "skills": {
+      "title": "Skills",
+      "skillType": {
+        "programming": "Programming languages and tools",
+        "language": "Languages",
+        "software": "Softwares and services",
+        "methodology": "Methods"
+      },
+      "level": {
+        "JUNIOR": {
+          "name": "junior",
+          "description": "Basic Knowledge - less than 2 years of professional experience"
+        },
+        "MEDIOR": {
+          "name": "advanced",
+          "description": "Advanced Knowledge - 2-4 years of professional experience, or specific training"
+        },
+        "SENIOR": {
+          "name": "expert",
+          "description": "Advanced Knoledge - more than 4 years of professional experience, specific expertise"
+        },
+        "A1": {
+          "description": "Beginner - Can understand and use familiar everyday expressions"
+        },
+        "A2": {
+          "description": "Elementary - Can understand sentences and frequently used expressions related to areas of most immediate relevance"
+        },
+        "B1": {
+          "description": "Intermediate - Can understand the main points of clear standard input on familiar matters regularly encountered in work, school, leisure, etc."
+        },
+        "B2": {
+          "description": "Upper Intermediate - Can understand the main ideas of complex text on both concrete and abstract topics, including technical discussions in his/her field of specialisation. Can interact with a degree of fluency and spontaneity that makes regular interaction with native speakers possible"
+        },
+        "C1": {
+          "description": "Advanced - Can understand a wide range of demanding, longer texts, and recognise implicit meaning. Can express him/herself fluently and spontaneously without much obvious searching for expressions. Can use language flexibly and effectively for social, academic and professional purposes."
+        },
+        "C2": {
+          "description": "Proficiency - Can understand with ease virtually everything heard or read. Can summarise information from different spoken and written sources, reconstructing arguments and accounts in a coherent presentation. Can express him/herself spontaneously, very fluently and precisely, differentiating finer shades of meaning even in more complex situations."
+        }
+      }
+    },
+    "experiences": {
+      "title": "Professional experiences"
+    }
   },
   "auth": {
     "linkto": {
