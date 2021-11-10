@@ -35,7 +35,7 @@ const Experiences: React.FC<{ experiences: IExperience[], lang: string }> = ({ e
               </Col>
               <Col xs={11}>
                 <h5><Translate translation={experience.title.translation} /></h5>
-                <div>{experience.company.name}</div>
+                <div><em>{t('CV.experiences.At')} <a href={experience.company.link}>{experience.company.name}</a></em></div>
                 <small>
                   <strong>{format(new Date(experience.from), dateFormat, { locale: locale })}</strong>
                   {` - `}

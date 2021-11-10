@@ -5,6 +5,7 @@ import Infos from './Info';
 import { Card, Container } from 'react-bootstrap';
 import Skills from './Skill';
 import Experiences from './Experience';
+import Education from './Education';
 
 interface ICVProps {
   cv: ICv,
@@ -16,6 +17,7 @@ const CV: React.FC<ICVProps> = (props: ICVProps) => {
     <Container><Infos /></Container>
     <Container><Skills /></Container>
     <Container><Experiences /></Container>
+    <Container><Education /></Container>
   </Card>
 }
 

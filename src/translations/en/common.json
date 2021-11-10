@@ -49,7 +49,12 @@
       }
     },
     "experiences": {
-      "title": "Professional experiences"
+      "title": "Professional experiences",
+      "At": "At"
+    },
+    "education": {
+      "title": "Education",
+      "At": "At"
     }
   },
   "auth": {
