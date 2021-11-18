@@ -121,7 +121,8 @@
       "placeholder":"Talk to me!",
       "error": {
         "unauthorized":"Hum it's seems your not authorized, please try to login"
-      }
+      },
+      "send": "Send message"
     },
     "btn": {
       "layout": {
