@@ -2,7 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { MdSend } from 'react-icons/md';
-import Form from 'react-bootstrap/Form'
+import Form from 'react-bootstrap/Form';
+import { Button } from 'react-bootstrap';
 
 import { ITextMessage, RecipientType, MessageType, TextMessage } from '@virtual-me/virtual-me-ts-core';
 
@@ -65,7 +66,9 @@ export const MessageInput = (props: MessageInputProps) => {
       value={message.content}
       as="textarea"
       placeholder={t('chat.form.placeholder')} />
-      <MdSend style={{ position: 'absolute', top: '30px', right: '10px' }} className="text-primary" />
+    <Button disabled={message.content.length === 0 }variant="white" title={t('chat.form.send')} className="rounded-circle" style={{ position: 'absolute', top: '20px', right: '10px' }} >
+      <MdSend size={"1.5em"} onClick={handleOnSubmit} className="text-primary" />
+    </Button>
   </Form>
 }
 

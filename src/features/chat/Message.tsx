@@ -19,12 +19,14 @@ export function Message(props: MessageProps) {
   const [t] = useTranslation('common')
   
   const handleOnQuickReply = (textMessage: string) => {
-    const newMessage: TextMessage = new TextMessage(textMessage)
+    const newMessage: ITextMessage = new TextMessage(textMessage);
+    newMessage.from = {
+      type: RecipientType.USER
+    };
     onSubmit(newMessage)
   }
   
   const renderContent = () => {
-    console.log(message.type)
     switch (message.type) {
       case MessageType.TEXT:
         const textMessage: ITextMessage = message as ITextMessage;
@@ -86,11 +88,9 @@ export function Message(props: MessageProps) {
     className="mb-2 shadow-sm"
   >
     <Card.Body>
-      <Card.Text>
-        {renderContent()}
-      </Card.Text>
+      {renderContent()}
     </Card.Body>
   </Card>
-}
+} 
 
 export default connect(null, { onSubmit: sendMessageAsync })(Message)

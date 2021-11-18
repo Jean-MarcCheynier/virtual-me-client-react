@@ -1,0 +1,19 @@
+/* The animation code */
+@keyframes write {
+  0% {left: 0px}
+  20% {top: -2px}
+  40% {left: 10px; top: 1px}
+  60% {top: -4px}
+  80% {left: 20px; top: 2px}
+  100% {left: 0px}
+}
+
+/* The element to apply the animation to */
+.pencil {
+  width: 40px;
+  position: relative;
+  animation-name: write;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: 2s;
+}

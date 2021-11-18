@@ -5,6 +5,8 @@ import { ChatLayout, selectChatLayout, restoreLayout } from './chatSlice';
 import styles from "./FloatingChat.module.scss";
 import { CSSTransition } from 'react-transition-group';
 import ButtonGroup from './ButtonGroup';
+import { BsFillChatDotsFill } from 'react-icons/bs'
+import { Button } from 'react-bootstrap';
 
 type FloatingChatProps = {
   chatLayout?: ChatLayout,
@@ -70,21 +72,27 @@ export const FloatingChat = (props: FloatingChatProps) => {
       in={chatLayout === ChatLayout.BUBBLE}
       timeout={400}
       classNames='floating-chat'>
-      <div className={`${styles.floatingBg} bubble shadow-sm p-2 ${displayContainer?'':'d-none'}`}
+      <div className={`${styles.floatingBg} bubble shadow-sm ${displayContainer?'':'d-none'}`}
         style={{
-          ...(chatLayout === ChatLayout.FLOATING) ? {...position, position: 'absolute'} : {},
+          ...(chatLayout === ChatLayout.FLOATING) ? {
+            ...position,
+            position: 'absolute',
+            backgroundColor: '#e2e2e255'
+          } : {},
           ...(chatLayout === ChatLayout.BUBBLE) ? { position: 'fixed' } : {},
           ...(chatLayout === ChatLayout.FIXED) ? { height: '100vh' } : {},
-          backgroundColor: 'rgb(255,255,255, 0.1)'
         }}
         onMouseDown={handleOnMouseDown}
         onClick={handleOnClick}
       >
-        {chatLayout !== ChatLayout.BUBBLE &&
-        <>
+        {chatLayout !== ChatLayout.BUBBLE ?
+        <div className="p-2">
           <ButtonGroup/>
           <Chat />
-        </>
+        </div>
+          :
+          <Button className="text-center h-100 w-100 rounded-circle"><BsFillChatDotsFill size={24} /></Button>
+          
         }   
       </div>
         
