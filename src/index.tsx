@@ -17,16 +17,17 @@ import i18n from './translations/i18n';
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
+      <Router>
       <WebSocketProvider>
         <I18nextProvider i18n={i18n}>
-          <Router>
+
             <Portal>
               <FloatingChat display={[ChatLayout.BUBBLE, ChatLayout.FLOATING]}/>
             </Portal>
             <App />
-          </Router>
         </I18nextProvider>
       </WebSocketProvider>
+      </Router>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')
