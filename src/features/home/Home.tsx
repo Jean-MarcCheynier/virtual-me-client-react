@@ -9,6 +9,7 @@ import { selectChatLayout } from './../chat/chatSlice';
 import Signout from '../auth/Signout';
 import { Route, Switch, useRouteMatch } from 'react-router';
 import CV from '../cv/CV';
+import Presentation from './Presentation';
 
 type HomeProps = {
   auth: IAuthState;
@@ -31,13 +32,13 @@ const Home = (props: HomeProps) => {
           <FloatingChat display={[ChatLayout.FIXED]}/>
         </Col>
       </CSSTransition>
-      <Col >
+      <Col style={{ maxHeight: '100vh', overflowY: 'scroll'}} >
         <Switch>
           <Route exact path={`${path}/cv`}>
             <CV/>
           </Route>
           <Route exact path={path}>
-            plop
+            <Presentation/>
           </Route>
         </Switch>
       </Col>

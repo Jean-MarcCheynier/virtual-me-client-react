@@ -11,7 +11,7 @@ function Landing() {
   
   useEffect(() => {
     const onKeyDownListener = (e: any) => {
-      history.push(`/${lang}/home`)
+      history.push(`/${lang}/chat`)
     }
     setTimeout(() => {
       document.addEventListener('keydown', onKeyDownListener);
