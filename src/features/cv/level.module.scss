@@ -1,0 +1,6 @@
+@import '../../style/bootstrap/custom.scss';
+@use 'bootstrap/sass/functions';
+
+.levelHover:hover {
+  filter: drop-shadow(0px 0px 2px lighten($primary, 10%));
+}

@@ -19,7 +19,7 @@ function Signout(props: any) {
   }
   
   if (auth.role) {
-    return <Dropdown className="position-fixed" style={{ top: '20px', right: '50px'}}>
+    return <Dropdown className="position-fixed" style={{ top: '20px', right: '50px', zIndex: 100 }}>
         <Dropdown.Toggle variant="success"
           className={`${styles.customToggleBtn} rounded-circle`}
           id="dropdown-basic">

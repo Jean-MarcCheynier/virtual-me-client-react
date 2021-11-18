@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import {
   useLocation,
   Switch,
@@ -5,33 +6,46 @@ import {
   Redirect
 } from "react-router-dom";
 import { TransitionGroup, CSSTransition } from 'react-transition-group'
-import Signin from './features/auth/Signin';
 import Landing from './features/home/Landing';
 import Home from './features/home/Home';
+import PreferencesHandler from './features/preferences/PreferencesHandler';
+import { useDispatch } from 'react-redux';
+import { getCvAsync } from './features/cv/cvSlice';
+import i18n from './translations/i18n';
+import { RouteConfig, routes } from './components/RouteConfig';
 
-
+const baseRouteUrl = "/:lang(fr|en)";
+export const baseUrl = `/${i18n.language}`;
 
 function App() {
+
+  const location = useLocation();
+  const dispatch = useDispatch();
   
-  const location = useLocation()
+  useEffect(() => {
+    dispatch(getCvAsync())
+  }, [dispatch])
+
   
   return (
     <div lang="">
+      <PreferencesHandler/>
       <TransitionGroup>
         <CSSTransition
           timeout={300}
           classNames='fade'
-          key={"plop"}
+          key={"id"}
         >
           <Switch location={location}>
-            <Route exact path={["/", "/:lang"]}><Redirect to="/en/home"/></Route>
-            <Route path="/:lang/landing" exact={true} component={Landing} />
-            <Route path="/:lang/home" component={Home} />
-            <Route path="/:lang/signin" component={Signin} />
+            <Route exact path="/"><Redirect to="/en" /></Route>
+            <Route exact path={`${baseRouteUrl}`} render={props => (
+              <Redirect to={`${props.match.params.lang}/chat/`} />)} />
+            <Route path={`${baseRouteUrl}/landing`} exact={true} component={Landing} />
+            <Route path={`${baseRouteUrl}/chat`} component={Home} />
           </Switch>
         </CSSTransition>
       </TransitionGroup>
-    </div>
+    </div>  
   );
 }
 

@@ -41,7 +41,6 @@ function Signup(props: RouteComponentProps<{status: string}, any, unknown> | any
     dispatch(signupAsync(values))
       .unwrap()
       .then((originalPromiseResult) => {
-        alert("then");
         setSubmitting(false)
         dispatch(signinAsync({ login: values.login, password: values.password }))
       })

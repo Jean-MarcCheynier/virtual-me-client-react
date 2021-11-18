@@ -24,8 +24,6 @@ export class VirtualMeAPI {
   public static initInterceptor(store: EnhancedStore) {
     this.getInstance().interceptors.request.use(req => {
       const state = store.getState();
-      console.log("State")
-      console.log(state);
       const token = state.auth.jwt;
       req.headers.authorization = `Bearer ${token}`;
       return req;
