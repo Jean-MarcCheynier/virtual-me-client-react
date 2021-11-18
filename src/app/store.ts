@@ -14,6 +14,7 @@ export const store = configureStore({
     preferences: preferencesReducer,
     cv: cvReducer
   },
+  devTools: process.env.NODE_ENV !== 'production'
 });
 VirtualMeAPI.initInterceptor(store);
 

@@ -39,9 +39,9 @@ function App() {
           <Switch location={location}>
             <Route exact path="/"><Redirect to="/en" /></Route>
             <Route exact path={`${baseRouteUrl}`} render={props => (
-              <Redirect to={`${props.match.params.lang}/home/`} />)} />
+              <Redirect to={`${props.match.params.lang}/chat/`} />)} />
             <Route path={`${baseRouteUrl}/landing`} exact={true} component={Landing} />
-            <Route path={`${baseRouteUrl}/home`} component={Home} />
+            <Route path={`${baseRouteUrl}/chat`} component={Home} />
           </Switch>
         </CSSTransition>
       </TransitionGroup>

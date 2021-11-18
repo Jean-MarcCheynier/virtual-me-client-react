@@ -28,12 +28,12 @@ export const routes: IRoute[] = [
   {
     path: `/`,
     exact: true,
-    component: () => <Redirect to="/en/home" />
+    component: () => <Redirect to="/en/chat" />
   },
   {
     path: `${baseRouteUrl}`,
     exact: true,
-    component: (props: any) => <Redirect to={`/en/home/`} />
+    component: (props: any) => <Redirect to={`/en/chat/`} />
   },
   {
     path: `${baseRouteUrl}/landing`,
@@ -41,7 +41,7 @@ export const routes: IRoute[] = [
     component: Landing
   },
   {
-    path: `${baseRouteUrl}/home`,
+    path: `${baseRouteUrl}/chat`,
     component: Home,
     routes: [
       {
