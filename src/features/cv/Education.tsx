@@ -23,19 +23,20 @@ const Education: React.FC<{ degrees: IDegree[], lang: string }> = ({ degrees, la
       return enUS
   }, [lang]);
   
-  return <Row>
+  return <>
     <h4 className="text-primary">Education</h4>
-    {degrees && degrees.map((degree: IDegree) => (
-      <>
+    {degrees && degrees.map((degree: IDegree, index: number) => (
+      <Row key={index}>
         <Col xs={1}><Image src={degree.school.logo} fluid /> </Col>
         <Col xs={11}>
           <h5><Translate translation={degree.title.translation} /></h5>
-          <small><strong>{format(new Date(degree.date), dateFormat, { locale: locale })}</strong></small>
           <div><em>{t('CV.education.At')}  <a href="degree.school.link">{degree.school.name}</a></em></div>
+          <small><strong>{format(new Date(degree.date), dateFormat, { locale: locale })}</strong></small>
+          
         </Col>
-      </>
+      </Row>
     ))}
-  </Row>
+  </>
 }
 
 const mapStateToProps = (state: any) => ({

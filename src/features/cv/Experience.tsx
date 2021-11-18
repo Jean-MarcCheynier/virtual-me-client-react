@@ -23,13 +23,12 @@ const Experiences: React.FC<{ experiences: IExperience[], lang: string }> = ({ e
       return enUS
   }, [lang]);
 
-  return <Row>
+  return <>
     <h4 className="text-primary">{t('CV.experiences.title')}</h4>
     {
       experiences && experiences.sort((a, b) => (new Date(b.from).getTime() - new Date(a.from).getTime()))
-        .map((experience: IExperience) => {
-          return <>
-            <Row>
+        .map((experience: IExperience, index: number) => {
+          return <Row className="mb-2" key={index}>
               <Col xs={1}>
                 <Image fluid width="100" src={experience.company.logo} />
               </Col>
@@ -44,12 +43,9 @@ const Experiences: React.FC<{ experiences: IExperience[], lang: string }> = ({ e
                 <ReactMarkdown>{experience.description.translation[lang]}</ReactMarkdown>
               </Col>
             </Row>
-
-            
-          </>
         })
     }
-    </Row>
+    </>
 }
 
 const mapStateToProps = (state: any) => ({

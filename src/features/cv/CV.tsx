@@ -14,10 +14,21 @@ interface ICVProps {
 
 const CV: React.FC<ICVProps> = (props: ICVProps) => {
   return <Card>
-    <Container><Infos /></Container>
-    <Container><Skills /></Container>
-    <Container><Experiences /></Container>
-    <Container><Education /></Container>
+    <Container>
+      <Infos />
+      <hr/>
+    </Container>
+    <Container>
+      <Skills />
+      <hr />
+    </Container>
+    <Container>
+      <Experiences />
+      <hr />
+    </Container>
+    <Container>
+      <Education />
+    </Container>
   </Card>
 }
 
