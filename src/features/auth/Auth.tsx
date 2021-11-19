@@ -13,7 +13,7 @@ const Auth = function() {
 
     return ( <div>
         <Switch>
-            <Route path={`/${lang}/signup`}>
+            <Route path={`/:lang/chat/signup`}>
                 <Signup/>
                 <div className="my-1 text-end text-primary">
                     <Link to={`/${lang}/signin`}>{t('auth.linkto.signin')}</Link>
@@ -22,7 +22,7 @@ const Auth = function() {
             <Route path={[`/:lang/chat/signin`, `/:lang/chat`]}>
                 <Signin/>
                 <div className="my-1 text-end text-primary">
-                    <Link to={`/${lang}/signup`}>{t('auth.linkto.signup')}</Link>
+                    <Link to={`/${lang}/chat/signup`}>{t('auth.linkto.signup')}</Link>
                 </div>
             </Route>
         </Switch>
