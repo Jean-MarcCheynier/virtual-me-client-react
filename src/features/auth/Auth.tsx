@@ -16,7 +16,7 @@ const Auth = function() {
             <Route path={`/:lang/chat/signup`}>
                 <Signup/>
                 <div className="my-1 text-end text-primary">
-                    <Link to={`/${lang}/signin`}>{t('auth.linkto.signin')}</Link>
+                    <Link to={`/${lang}/chat/signin`}>{t('auth.linkto.signin')}</Link>
                 </div>
             </Route>
             <Route path={[`/:lang/chat/signin`, `/:lang/chat`]}>
