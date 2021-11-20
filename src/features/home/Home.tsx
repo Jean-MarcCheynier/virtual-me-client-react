@@ -37,7 +37,7 @@ const Home = (props: HomeProps) => {
           <Route exact path={`${path}/cv`}>
             <CV/>
           </Route>
-          <Route exact path={path}>
+          <Route path={path}>
             <Presentation/>
           </Route>
         </Switch>

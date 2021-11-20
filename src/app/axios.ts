@@ -13,6 +13,7 @@ export class VirtualMeAPI {
         timeout: 6000,
         headers: {
           accept: '*/*',
+          "Access-Control-Allow-Origin": "*",
           'Content-Type': 'application/json',
         }
       })
