@@ -13,6 +13,7 @@ import { useDispatch } from 'react-redux';
 import { getCvAsync } from './features/cv/cvSlice';
 import i18n from './translations/i18n';
 import { RouteConfig, routes } from './components/RouteConfig';
+import GihubAuth from './features/auth/GihubAuth';
 
 const baseRouteUrl = "/:lang(fr|en)";
 export const baseUrl = `/${i18n.language}`;
@@ -38,6 +39,7 @@ function App() {
         >
           <Switch location={location}>
             <Route exact path="/"><Redirect to="/en" /></Route>
+            <Route exact path={`${baseRouteUrl}/signing/:provider`} component={GihubAuth} />
             <Route exact path={`${baseRouteUrl}`} render={props => (
               <Redirect to={`${props.match.params.lang}/chat/`} />)} />
             <Route path={`${baseRouteUrl}/landing`} exact={true} component={Landing} />
