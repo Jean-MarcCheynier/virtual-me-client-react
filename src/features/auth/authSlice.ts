@@ -27,7 +27,6 @@ const getInitialState: () => IAuthState = () => {
   }
   const strSession = window.sessionStorage.getItem('virtualMe');
   if (strSession) {
-    console.info("hasSession")
     try {
       const JSONsession = JSON.parse(strSession);
       state = { ...state, ...JSONsession } 
@@ -80,8 +79,6 @@ export const authSlice = createSlice({
   reducers: {
     reset: () => getInitialState(),
     setToken: (state, action) => {
-      console.log("action");
-      console.log(action);
       const token = action.payload;
       window.sessionStorage.setItem('virtualMe', JSON.stringify({"jwt":token}));
       return { ...state, jwt: token }

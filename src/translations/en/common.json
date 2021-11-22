@@ -110,6 +110,11 @@
       "error": {
         "unauthorized": "Wrong credentials"
       }
+    },
+    "github": {
+      "submit": {
+        "label": "Sign in with Github"
+      }
     }
   },
   "menu": {

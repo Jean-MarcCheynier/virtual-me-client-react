@@ -43,8 +43,8 @@
     border-radius: 50%;
     height: 50px;
     width: 50px;
-    bottom: 50px;
-    right: 50px;
+    bottom: 1em;
+    right: 1em;
     transition: height 350ms, width 350ms, border-radius 350ms, bottom 350ms, right 350ms;
   }
   
@@ -52,8 +52,8 @@
     height: 50px;
     width: 50px;
     border-radius: 50%;
-    bottom: 50px;
-    right: 50px;
+    bottom: 1em;
+    right: 1em;
   }
   
   &.floating-chat-exit {

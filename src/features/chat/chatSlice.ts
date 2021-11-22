@@ -47,7 +47,6 @@ export const sendMessageAsync = createAsyncThunk(
             if (typeof delaySecond === "string")
               delaySecond = parseInt(delaySecond)
             await sleep(delaySecond * 1000)
-            console.log("Delayed");
           }
         }
       })
@@ -60,7 +59,7 @@ export const sendMessageAsync = createAsyncThunk(
               return [new I18NTextMessage("chat.form.error.default")]
           }
         } else {
-          console.log(e);
+          console.error(e);
           return [new I18NTextMessage("chat.form.error.connexion")]
         }
       })

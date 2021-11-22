@@ -3,10 +3,12 @@ import ButtonLight from '../../components/custom/buttons/ButtonLight';
 import { ChatLayout, setLayout, selectChatLayout } from './chatSlice';
 import { FaMinus, FaClone, FaExternalLinkSquareAlt } from 'react-icons/fa';
 import { connect, useDispatch } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 
 const ButtonGroup = (props: any) => {
   
   const { chatLayout } = props;
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 600px)' });
   const dispatch = useDispatch();
   
   const setFloatting = () => {
@@ -22,7 +24,7 @@ const ButtonGroup = (props: any) => {
   }
   
   return (
-    <div className="mb-2 d-flex flex-row-reverse">
+    <div className={`m-2 d-flex flex-row-reverse`}>
       { chatLayout === ChatLayout.FIXED &&
       <>
         <ButtonLight className="ml-1" onClick={setFloatting} id='chat.btn.layout.floating' tooltip='chat.btn.layout.floating'>
@@ -34,9 +36,9 @@ const ButtonGroup = (props: any) => {
       </>}
       { chatLayout === ChatLayout.FLOATING &&
       <>
-        <ButtonLight className="pt-0 ml-1" onClick={setFix} id='chat.btn.layout.fixed' tooltip='chat.btn.layout.fixed'>
+        {!isTabletOrMobile && <ButtonLight className="pt-0 ml-1" onClick={setFix} id='chat.btn.layout.fixed' tooltip='chat.btn.layout.fixed'>
           <FaExternalLinkSquareAlt />
-        </ButtonLight >
+        </ButtonLight >}
         <ButtonLight onClick={setBubble} id='chat.btn.layout.bubble' tooltip='chat.btn.layout.bubble'>
           <FaMinus />
         </ButtonLight >

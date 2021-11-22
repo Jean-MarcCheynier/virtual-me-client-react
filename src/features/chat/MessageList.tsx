@@ -5,8 +5,9 @@ import { ChatLayout, selectMessageList, selectChatLayout, selectSendingStatus } 
 import { IMessage, MessageType, RecipientType } from '@virtual-me/virtual-me-ts-core';
 import Message from './Message';
 
-import styles from './MessageList.module.scss';
+import styles from './chat.module.scss';
 import Pencil from './Pencil';
+import { useMediaQuery } from 'react-responsive';
 
 type MessageListProps = {
   chatLayout: ChatLayout,
@@ -17,6 +18,7 @@ type MessageListProps = {
 export const MessageList: React.FC<MessageListProps> = (props) => {
   
   const { messageList, chatLayout, status } = props;
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 600px)' });
   const bottomList = useRef(null)
   const [showScroll, setShowScroll] = useState(false);
   
@@ -42,9 +44,20 @@ export const MessageList: React.FC<MessageListProps> = (props) => {
     scrollToBottom();
   }, [messageList])
   
-  return <div className="position-relative">
-    {showScroll && <div className={styles.topShadow} />}
-    <div className={`mx-2 py-2 ${styles.scrollableList} ${chatLayout === ChatLayout.FIXED ? styles.fixScrollableList:""}`} onScroll={handleOnScroll}>
+  const style: any = {};
+  if (chatLayout === ChatLayout.FLOATING && !isTabletOrMobile) {
+    style.maxHeight = "calc( 80vh - 200 px )";
+  }
+  
+  return <div className={styles.container} style={style}>
+    {(showScroll && (isTabletOrMobile || chatLayout !== ChatLayout.FLOATING)) &&
+      <div className={styles.topShadow} />}
+    <div className={`mx-2 py-2 
+        ${styles.scrollableList} 
+        ${chatLayout === ChatLayout.FIXED ? styles.fixScrollableList : ""}
+        ${chatLayout === ChatLayout.FLOATING && !isTabletOrMobile ? styles.floatingScrollableList : ""}
+      `}
+      onScroll={handleOnScroll}>
       {messageList.length !== 0 && messageList.map((msg, index) =>
       <div key={index}
         className={`mw-75 d-flex ${msg?.from?.type === RecipientType.BOT ? 'flex-row' : 'flex-row-reverse'} bd-highlight`}>

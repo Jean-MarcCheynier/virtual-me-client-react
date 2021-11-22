@@ -17,7 +17,7 @@ const Auth = function() {
         //authWithGithub();
     }
 
-    return ( <div>
+    return ( <div className="mt-5 mx-2">
         <Switch>
             <Route path={`/:lang/chat/signup`}>
                 <Signup />
@@ -29,7 +29,7 @@ const Auth = function() {
                 <Signin />
                 <Button variant="dark" className="mt-1 w-100">
                     <a className="text-white" href={`${process.env.REACT_APP_VIRTUAL_ME_API_BASE_URL}/auth/github`}>
-                        <FaGithubAlt/>&nbsp;Sign in with github
+                        <FaGithubAlt />&nbsp;{t('signin.github.submit.label')}
                     </a>
                 </Button>
                 <div className="my-1 text-end text-primary">

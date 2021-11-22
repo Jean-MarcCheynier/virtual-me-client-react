@@ -21,7 +21,7 @@ const Chat = (props: ChatProps) => {
           <MessageInput />
         </>
         :
-        <Auth />
+          <Auth />
     }
   </>)
 

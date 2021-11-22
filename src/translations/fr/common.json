@@ -110,6 +110,11 @@
       "error": {
         "unauthorized": "Nom d'utilisateur ou mot de passe erroné"
       }
+    },
+    "github": {
+      "submit": {
+        "label": "Connexion avec Github"
+      }
     }
   },
   "menu": {

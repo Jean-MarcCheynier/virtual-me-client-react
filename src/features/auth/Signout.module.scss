@@ -1,6 +1,7 @@
 .customToggleBtn {
   height: 3em;
   width: 3em;
+  z-index: 1;
   &::after {  
     display: none;
   }
