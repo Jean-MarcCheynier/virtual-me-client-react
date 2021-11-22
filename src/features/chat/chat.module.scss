@@ -1,0 +1,134 @@
+@import '../../style/App.scss';
+@use 'bootstrap/sass/functions';
+
+$containerHeight: 100vh;
+$containerHeight-xs: 60vh;
+$buttonGroupHeight: 50px;
+$buttonGroupHeight-xs: 25px;
+$messageInputHeight: 250px;
+$messageInputHeight-xs: 200px;
+$messageListHeight: 100vh;
+$messageListHeight-xs: 60vh;
+
+//Containers - depending on chat layout
+.container-floating { 
+  position: absolute;
+  z-index: 1;
+  background-color: '#e2e2e255';
+  max-width: 400px;
+  max-height: 80vh;
+}
+
+.container-bubble { 
+  position: fixed;
+  bottom: '50px';
+  right: '50px';
+  z-index: 1;
+}
+
+.container-fixed { 
+  height: $containerHeight
+}
+
+.buttonGroup {
+  padding-top: 2px;;
+  height: $buttonGroupHeight;
+}
+
+.container {
+  position: relative;
+}
+
+.scrollableList {
+  max-height: 100%;
+  overflow-y: scroll;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.fixScrollableList {
+  height: calc(100vh - 200px);
+}
+
+.floatingScrollableList {
+  height: calc(60vh - 85px);
+}
+
+.topShadow {
+  position: absolute;
+  z-index: 1; 
+  top: 0; 
+  left: 0;
+  height: 20px;
+  width: 100%; 
+  //background: $VM-bg;
+  background-image: linear-gradient( rgba($VM-bg, 1), 50%, rgba(236, 197, 204, 0));
+}
+
+.bottomShadow {
+  position: absolute;
+  z-index: 1; 
+  bottom: 0; 
+  left: 0;
+  height: 20px;
+  width: '100%'; 
+  background-image: linear-gradient(rgba(236, 197, 204, 0), 60%, rgba(236, 197, 204, 0));
+}
+
+.chat {
+  max-height: 60vh;
+}
+
+
+// Floating chat on mobile
+@media only screen and (max-width: 600px) {
+  $bottom: $VM-bg;
+  $mid: $VM-bg;
+  $top: $VM-bg;
+  .container-floating { 
+    position: fixed !important;
+    bottom: 0px !important;
+    height: $containerHeight-xs;
+    width: 100vw;
+    z-index: 1000;
+
+    //background-color: #50505098;
+    background: linear-gradient(0deg, $bottom 0%, rgba($mid, 0.9) 40%, rgba($top, 0.3) 100%);
+  }
+
+  .container-bubble { 
+    z-index: 1;
+  }
+
+  .container-fixed { 
+    //background-color: rgb(0, 255, 0);
+  }
+
+  .buttonGroup {
+    height: $buttonGroupHeight-xs;
+    color: $primary;
+    position: absolute;
+    width: 100%;
+  z-index: 1;
+  }
+
+  .scrollableList {
+    max-height: calc( #{$containerHeight-xs} - 80px );
+  }
+
+  .topShadow {
+    height: 20px;
+    width: 100%; 
+    background-image: linear-gradient( rgba($top, 0), 0%, rgba($mid, 1), 50%, rgba($mid, 1), 100%);
+  }
+
+  .chat {
+    height: $containerHeight-xs
+  }
+}
+
+
