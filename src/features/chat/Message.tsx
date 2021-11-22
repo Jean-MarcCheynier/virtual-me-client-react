@@ -85,7 +85,7 @@ export function Message(props: MessageProps) {
     style={{maxWidth:"80%"}}
     bg={bg}
     text={text}
-    className="mb-2 shadow-sm"
+    className="message mb-2 shadow-sm"
   >
     <Card.Body>
       {renderContent()}
