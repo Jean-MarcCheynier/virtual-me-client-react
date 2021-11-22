@@ -66,8 +66,18 @@ export const MessageInput = (props: MessageInputProps) => {
       value={message.content}
       as="textarea"
       placeholder={t('chat.form.placeholder')} />
-    <Button disabled={message.content.length === 0 }variant="white" title={t('chat.form.send')} className="rounded-circle" style={{ position: 'absolute', top: '20px', right: '10px' }} >
-      <MdSend size={"1.5em"} onClick={handleOnSubmit} className="text-primary" />
+    <Button disabled={message.content.length === 0}
+      variant="white"
+      title={t('chat.form.send')}
+      className="rounded-circle"
+      style={{
+        position: 'absolute',
+        top: '15px',
+        right: '10px',
+        width: '2em',
+        height: '2em'
+      }} >
+      <MdSend style={{ marginTop: '-4px', marginLeft: '-7px'}} size={"1.5em"} onClick={handleOnSubmit} className="text-primary" />
     </Button>
   </Form>
 }
