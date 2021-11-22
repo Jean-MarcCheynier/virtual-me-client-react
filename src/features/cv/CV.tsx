@@ -13,7 +13,7 @@ interface ICVProps {
 }
 
 const CV: React.FC<ICVProps> = (props: ICVProps) => {
-  return <Card>
+  return <Card className="mt-2">
     <Container>
       <Infos />
       <hr/>

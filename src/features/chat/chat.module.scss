@@ -94,6 +94,7 @@ $messageListHeight-xs: 60vh;
     bottom: 0px !important;
     height: $containerHeight-xs;
     width: 100vw;
+    max-width: 100vw;
     z-index: 1000;
 
     //background-color: #50505098;
@@ -117,7 +118,7 @@ $messageListHeight-xs: 60vh;
   }
 
   .scrollableList {
-    max-height: calc( #{$containerHeight-xs} - 80px );
+    height: calc( #{$containerHeight-xs} - 85px );
   }
 
   .topShadow {

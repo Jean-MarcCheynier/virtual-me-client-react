@@ -12,7 +12,6 @@ import PreferencesHandler from './features/preferences/PreferencesHandler';
 import { useDispatch } from 'react-redux';
 import { getCvAsync } from './features/cv/cvSlice';
 import i18n from './translations/i18n';
-import { RouteConfig, routes } from './components/RouteConfig';
 import GihubAuth from './features/auth/GihubAuth';
 
 const baseRouteUrl = "/:lang(fr|en)";

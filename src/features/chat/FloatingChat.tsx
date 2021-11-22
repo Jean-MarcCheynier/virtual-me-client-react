@@ -1,5 +1,5 @@
-import React, {useState, useEffect, useMemo} from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import { connect} from 'react-redux';
 import Chat from './Chat';
 import { ChatLayout, selectChatLayout, restoreLayout, setLayout } from './chatSlice';
 import styles from "./chat.module.scss";
@@ -33,16 +33,16 @@ type FloatingChatProps = {
  * @returns 
  */
 export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
-  const { chatLayout, display, selectChatLayout, restoreLayout, setLayout } = props;
+  const { chatLayout, display, restoreLayout, setLayout } = props;
   
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 600px)' });
-  const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
+  //const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
   
   useEffect(() => {
     if (isTabletOrMobile) {
       setLayout(ChatLayout.FLOATING)
     }
-  }, [isTabletOrMobile, selectChatLayout])
+  }, [isTabletOrMobile, setLayout])
   
 
   
