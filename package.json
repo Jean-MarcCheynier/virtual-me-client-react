@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@reduxjs/toolkit": "^1.5.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
     "@types/jest": "^24.0.0",
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.0",
     "@types/react-dom": "^16.9.0",
     "@types/react-redux": "^7.1.7",
     "@types/react-router-dom": "^5.1.7",
-    "@reduxjs/toolkit": "^1.5.1",
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.3.2",
-    "@testing-library/user-event": "^7.1.2",
     "@virtual-me/virtual-me-ts-core": "^1.0.28",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.1",
@@ -31,6 +31,7 @@
     "react-icons": "^4.2.0",
     "react-markdown": "^7.1.0",
     "react-redux": "^7.2.0",
+    "react-responsive": "^9.0.0-beta.4",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
     "socket.io-client": "^4.1.2",
@@ -58,7 +59,5 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {
-
-  }
+  "devDependencies": {}
 }
