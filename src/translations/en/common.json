@@ -2,6 +2,12 @@
   "welcome": {
     "title": "Welcome to {{framework}}"
   },
+  "presentation": {
+    "title1": "Virtual-me",
+    "text1": "Virtual-me is not a portfolio. It's a laboratory, a learning support material, and a communication medium.",
+    "title2": "It's also,",
+    "text2": "A chat, connected, fullstack javascript, uncommon, opensource, a resume, fun, dynamic, an API, mulitlingual, responsive, accessible, funny, questionable, testable, secured, dockerized, on Github, free"
+  },
   "CV": {
     "infos": {
       "bornIn": "Date of birth ",

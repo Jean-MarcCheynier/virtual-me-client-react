@@ -48,7 +48,7 @@ function WebSocketProvider(props: WebSocketProviderProps) {
 
     }
 
-  }, [ws, dispatch, history])
+  }, [ws, dispatch, history, lang])
   
 /** 
   const sendMessage = (roomId: string, message: string) => {

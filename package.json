@@ -1,7 +1,8 @@
 {
   "name": "virtual-me-react",
-  "version": "0.1.0",
   "private": true,
+  "buildDate": "",
+  "version": "0.2.0",
   "dependencies": {
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^4.2.4",

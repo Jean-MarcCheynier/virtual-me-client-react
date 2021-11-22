@@ -5,7 +5,7 @@ import Translate from './Translate';
 import { connect } from 'react-redux';
 import { HoverLevel, Level } from './Level';
 import { useTranslation } from 'react-i18next';
-import { FaAngular, FaGitAlt, FaJava, FaJsSquare, FaNodeJs, FaReact, FaPython, FaSass, FaHtml5 } from 'react-icons/fa';
+import { FaAngular, FaGitAlt, FaJava, FaJsSquare, FaNodeJs, FaReact, FaPython, FaHtml5 } from 'react-icons/fa';
 
 const SkillIcons: Record<string, JSX.Element> = {
   'JS': <FaJsSquare />,
