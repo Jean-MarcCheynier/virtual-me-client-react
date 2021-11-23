@@ -1,39 +1,56 @@
-import React, {useState} from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import { connect} from 'react-redux';
 import Chat from './Chat';
-import { ChatLayout, selectChatLayout, restoreLayout } from './chatSlice';
-import styles from "./FloatingChat.module.scss";
+import { ChatLayout, selectChatLayout, restoreLayout, setLayout } from './chatSlice';
+import styles from "./chat.module.scss";
 import { CSSTransition } from 'react-transition-group';
 import ButtonGroup from './ButtonGroup';
 import { BsFillChatDotsFill } from 'react-icons/bs'
 import { Button } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
+
+const defaultPosition = {
+  top: 50,
+  left: 450,
+}
+
+const defaultOffset = {
+  top: 0,
+  left: 0,
+}
 
 type FloatingChatProps = {
   chatLayout?: ChatLayout,
-  display?: ChatLayout[]
+  prevLayout?: any,
+  display?: ChatLayout[],
+  restoreLayout?: any,
+  setLayout: any,
+  selectChatLayout?: any
 }
 /**
  * @Description Floating container for Chat.tsx Component. 
  * Here we intercept events to position the chat component on the screen
  * @returns 
  */
-export const FloatingChat = (props: FloatingChatProps) => {
+export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
+  const { chatLayout, display, restoreLayout, setLayout } = props;
   
-  const defaultPosition = {
-    top: 50,
-    left: 450,
-  }
+  const isTabletOrMobile = useMediaQuery({ query: '(max-width: 600px)' });
+  //const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
   
-  const defaultOffset = {
-    top: 0,
-    left: 0,
-  }
+  useEffect(() => {
+    if (isTabletOrMobile) {
+      setLayout(ChatLayout.FLOATING)
+    }
+  }, [isTabletOrMobile, setLayout])
+  
+
   
   const [position, setPosition] = useState(defaultPosition);
   const [offset, setOffset] = useState(defaultOffset);
-  const { chatLayout, display } = props;
+
   
-  const dispatch = useDispatch();
+  
   
   const whileMove = (e: any) => {
     setPosition(position => ({
@@ -43,7 +60,6 @@ export const FloatingChat = (props: FloatingChatProps) => {
     }))
   }
   
-
   const endMove = () => {
     window.removeEventListener('mousemove', whileMove);
     window.removeEventListener('mouseup', endMove);
@@ -51,7 +67,10 @@ export const FloatingChat = (props: FloatingChatProps) => {
   
   // Trigger scroll on mousedown
   const handleOnMouseDown = (e: any) => {
-    if (chatLayout === ChatLayout.FLOATING) {
+    if (chatLayout === ChatLayout.FLOATING && !isTabletOrMobile) {
+      if (e.target.className === "card-body") {
+        return 
+      }
       e.stopPropagation(); // remove if you do want it to propagate ..
       setOffset({ left: e.nativeEvent.layerX, top: e.nativeEvent.layerY })
       window.addEventListener('mousemove', whileMove);
@@ -60,38 +79,39 @@ export const FloatingChat = (props: FloatingChatProps) => {
   }
   
   const handleOnClick = (e: any) => {
-    if (chatLayout === ChatLayout.BUBBLE) { dispatch(restoreLayout()) }
+    if (chatLayout === ChatLayout.BUBBLE) { restoreLayout() }
   }
   
   //If the attribute 'display' is specified, then display the inner component only for the ChatPosition specified.
   //If it is not specified then the inner component is displayed by default.
   const displayContainer = display === undefined || (chatLayout && display && display.includes(chatLayout))
-  
+
+  const cClass = styles[`container-${chatLayout}`];
   return (
     <CSSTransition
       in={chatLayout === ChatLayout.BUBBLE}
       timeout={400}
       classNames='floating-chat'>
-      <div className={`${styles.floatingBg} bubble shadow-sm ${displayContainer?'':'d-none'}`}
+      <div className={`${cClass}  chat-container shadow-sm ${displayContainer ? '' : 'd-none'} ${chatLayout}`}
         style={{
-          ...(chatLayout === ChatLayout.FLOATING) ? {
-            ...position,
-            position: 'absolute',
-            backgroundColor: '#e2e2e255'
-          } : {},
-          ...(chatLayout === ChatLayout.BUBBLE) ? { position: 'fixed' } : {},
-          ...(chatLayout === ChatLayout.FIXED) ? { height: '100vh' } : {},
+          ...(chatLayout === ChatLayout.FLOATING && !isTabletOrMobile) ? {
+            ...position
+          } : {}
         }}
         onMouseDown={handleOnMouseDown}
         onClick={handleOnClick}
       >
         {chatLayout !== ChatLayout.BUBBLE ?
-        <div className="p-2">
+          <>
+        <div className={styles.buttonGroup}>
           <ButtonGroup/>
-          <Chat />
         </div>
+        <div className={styles.chat}>   
+          <Chat />
+      </div>
+</>
           :
-          <Button className="text-center h-100 w-100 rounded-circle"><BsFillChatDotsFill size={24} /></Button>
+        <Button className="text-center h-100 w-100 rounded-circle"><BsFillChatDotsFill size={24} /></Button>
           
         }   
       </div>
@@ -102,6 +122,11 @@ export const FloatingChat = (props: FloatingChatProps) => {
 const mapStateToProps = (state: any) => ({
   prevLayout: state.chat.prevLayout,
   chatLayout: selectChatLayout(state)
-})
+});
 
-export default connect(mapStateToProps, null)(FloatingChat)
+export default connect(mapStateToProps,
+  {
+    restoreLayout,
+    selectChatLayout,
+    setLayout
+  })(FloatingChat)

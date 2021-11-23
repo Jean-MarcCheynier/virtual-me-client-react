@@ -2,6 +2,8 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { signin, signup, getMe } from './authAPI';
 import { IUser, Role } from '@virtual-me/virtual-me-ts-core';
+import { reset as resetCv } from '../cv/cvSlice';
+import { reset as resetPreferences } from '../preferences/preferencesSlice'
 
 
 export interface IAuthState {
@@ -69,7 +71,9 @@ export const signupAsync = createAsyncThunk(
 export const signout = () => {
   return (dispatch: any) => {
     window.sessionStorage.removeItem('virtualMe');
-    return dispatch(reset());
+    dispatch(reset());
+    dispatch(resetCv());
+    dispatch(resetPreferences())
   }
 }
 
