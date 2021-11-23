@@ -39,6 +39,9 @@ $messageListHeight-xs: 60vh;
   position: relative;
 }
 
+.authContainer {
+}
+
 .scrollableList {
   max-height: 100%;
   overflow-y: scroll;
@@ -107,6 +110,12 @@ $messageListHeight-xs: 60vh;
 
   .container-fixed { 
     //background-color: rgb(0, 255, 0);
+  }
+
+  .authContainer{
+    background-color: $VM-bg;
+    max-height: 100vh;
+    height: 100vh;
   }
 
   .buttonGroup {
