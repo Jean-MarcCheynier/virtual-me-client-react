@@ -102,7 +102,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
           shadow-sm
           ${displayContainer ? '' : 'd-none'} 
           ${chatLayout} 
-          ${isTabletOrMobile && !authenticated ? styles.authContainer :''}
+          ${(isTabletOrMobile && !authenticated && chatLayout !== ChatLayout.BUBBLE) ? styles.authContainer :''}
         `}
         style={{
           ...(chatLayout === ChatLayout.FLOATING && !isTabletOrMobile) ? {
