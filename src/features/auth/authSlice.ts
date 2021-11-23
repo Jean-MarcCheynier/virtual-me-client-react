@@ -72,7 +72,7 @@ export const signout = () => {
     window.sessionStorage.removeItem('virtualMe');
     dispatch(reset());
     dispatch(resetCv());
-    dispatch(resetPreferences())
+    dispatch(resetPreferences());
   }
 }
 

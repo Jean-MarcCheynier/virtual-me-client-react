@@ -5,7 +5,7 @@ import { ChatLayout, selectChatLayout } from './chatSlice';
 
 type ChatProps = {
   authenticated?: boolean | null,
-  chatLayou?: ChatLayout
+  chatLayout?: ChatLayout
 }
 
 const Chat = (props: ChatProps) => {

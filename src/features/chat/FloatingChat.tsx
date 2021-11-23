@@ -8,6 +8,9 @@ import ButtonGroup from './ButtonGroup';
 import { BsFillChatDotsFill } from 'react-icons/bs'
 import { Button } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
+import Auth from '../auth/Auth';
+import { FaComments } from 'react-icons/fa';
+import { useTranslation } from 'react-i18next';
 
 const defaultPosition = {
   top: 50,
@@ -22,6 +25,7 @@ const defaultOffset = {
 type FloatingChatProps = {
   chatLayout?: ChatLayout,
   prevLayout?: any,
+  authenticated: any,
   display?: ChatLayout[],
   restoreLayout?: any,
   setLayout: any,
@@ -33,14 +37,15 @@ type FloatingChatProps = {
  * @returns 
  */
 export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
-  const { chatLayout, display, restoreLayout, setLayout } = props;
-  
+  const { chatLayout, display, restoreLayout, setLayout, authenticated } = props;
+  const [t] = useTranslation('common');
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 600px)' });
   //const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
   
   useEffect(() => {
     if (isTabletOrMobile) {
       setLayout(ChatLayout.FLOATING)
+      setLayout(ChatLayout.BUBBLE)
     }
   }, [isTabletOrMobile, setLayout])
   
@@ -92,7 +97,13 @@ export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
       in={chatLayout === ChatLayout.BUBBLE}
       timeout={400}
       classNames='floating-chat'>
-      <div className={`${cClass}  chat-container shadow-sm ${displayContainer ? '' : 'd-none'} ${chatLayout}`}
+      <div className={` ${cClass}  
+          chat-container
+          shadow-sm
+          ${displayContainer ? '' : 'd-none'} 
+          ${chatLayout} 
+          ${isTabletOrMobile && !authenticated ? styles.authContainer :''}
+        `}
         style={{
           ...(chatLayout === ChatLayout.FLOATING && !isTabletOrMobile) ? {
             ...position
@@ -106,9 +117,17 @@ export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
         <div className={styles.buttonGroup}>
           <ButtonGroup/>
         </div>
-        <div className={styles.chat}>   
-          <Chat />
-      </div>
+            {authenticated ?
+              <div className={styles.chat}>
+                <Chat />
+              </div>
+              :
+              <div className={`text-center mt-5 text-primary` }>
+                <FaComments size={70} />
+                <h2>{t('auth.mobileTitle')}</h2>
+                <Auth />
+              </div>
+            }
 </>
           :
         <Button className="text-center h-100 w-100 rounded-circle"><BsFillChatDotsFill size={24} /></Button>
@@ -121,7 +140,8 @@ export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
 
 const mapStateToProps = (state: any) => ({
   prevLayout: state.chat.prevLayout,
-  chatLayout: selectChatLayout(state)
+  chatLayout: selectChatLayout(state),
+  authenticated: state.auth.role
 });
 
 export default connect(mapStateToProps,
