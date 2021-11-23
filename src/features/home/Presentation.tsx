@@ -11,8 +11,9 @@ const Presentation: React.FC<any> = (props) => {
       {t('presentation.text1')}
     </p>
     <h2 className="text-primary">{t('presentation.title2')}</h2>
-    <p className="fs-4">
+    <p className="fs-4 text-justify">
       {t('presentation.text2')}
+
     </p>
   </div>
 }

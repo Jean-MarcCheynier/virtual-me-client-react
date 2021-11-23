@@ -7,20 +7,25 @@ import { FaRegUserCircle } from 'react-icons/fa'
 import styles from './Signout.module.scss';
 import { signout } from './authSlice';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router';
 
 function Signout(props: any) {
   
-  const { auth } = props;
+  const { auth, lang } = props;
   const dispatch = useDispatch();
+  const history = useHistory();
   const [t]  = useTranslation('common');
   
   const handleSignout = () => {
+    history.push(`/${lang}/chat`);
     dispatch(signout());
+    
   }
   
+  // Display image from profile
   let imgUrl = "";
   if (auth.profile) {
-    if (auth.profile.github) {
+    if (auth.profile?.github?.photos) {
       imgUrl = (auth.profile.github.photos.length) ? auth.profile.github.photos[0].value : "";
     }
   }
@@ -46,7 +51,8 @@ function Signout(props: any) {
 }
 
 const mapStateToProps = (state: any) => ({
-  auth: state.auth
+  auth: state.auth,
+  lang: state.preferences.lang
 })
 
 export default connect(mapStateToProps, null)(Signout)
