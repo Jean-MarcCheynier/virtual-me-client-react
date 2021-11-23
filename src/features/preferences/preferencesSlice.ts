@@ -6,15 +6,21 @@ const getInitialLang = () => {
     return lang;
 }
 
+const getInitialState = () => {
+    return {
+        lang: getInitialLang()
+    }
+}
+
 export const userPreferencesSlice = createSlice({
     name: 'preferences',
-    initialState: {
-        lang: getInitialLang()},
+    initialState: getInitialState(),
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
-        setLang: (state: any, action: any) => ({ ...state, lang: action.payload})
+        setLang: (state: any, action: any) => ({ ...state, lang: action.payload }),
+        reset: () => getInitialState()
     },
 });
 
-export const { setLang } = userPreferencesSlice.actions;
+export const { setLang, reset } = userPreferencesSlice.actions;
 export default userPreferencesSlice.reducer;

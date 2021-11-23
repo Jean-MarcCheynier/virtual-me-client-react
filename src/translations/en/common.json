@@ -64,6 +64,7 @@
     }
   },
   "auth": {
+    "mobileTitle":"Please sign in and talk to me!",
     "linkto": {
       "signup": "Not yet registered? Create an account!",
       "signin": "Already have an account? Sign in!"

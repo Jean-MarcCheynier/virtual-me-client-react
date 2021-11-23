@@ -1,7 +1,6 @@
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
 import { connect } from 'react-redux';
-import Auth from './../auth/Auth';
 import { ChatLayout, selectChatLayout } from './chatSlice';
 
 type ChatProps = {
@@ -11,18 +10,9 @@ type ChatProps = {
 
 const Chat = (props: ChatProps) => {
   
-  const { authenticated } = props;
-
-  
   return (<>
-      {authenticated ?
-        <>
           <MessageList />
           <MessageInput />
-        </>
-        :
-          <Auth />
-    }
   </>)
 
 }
