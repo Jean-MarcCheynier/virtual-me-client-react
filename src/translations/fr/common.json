@@ -2,7 +2,6 @@
   "welcome": {
     "title": "Bienvenu à {{framework}}"
   },
-
   "presentation": {
     "title1": "Virtual-me",
     "text1": "Virtual-me n'est pas un portfolio. C'est un laboratoire, un support d'apprentissage, de veille technologique, et de communication.",
