@@ -6,6 +6,7 @@ import Translate from './Translate';
 import { useTranslation } from 'react-i18next';
 import { format } from 'date-fns';
 import { fr, enUS } from 'date-fns/locale'
+import SortableSection from './SortableContainer';
 
 const dateFormat = 'MMM yyyy'
 const locales: any = {
@@ -13,9 +14,12 @@ const locales: any = {
   "fr": fr
 }
 
-const Education: React.FC<{ degrees: IDegree[], lang: string }> = ({ degrees, lang }) => {
+interface IEducationProps extends IDegree {
+  lang: string
+}
+
+const Education: React.FC<IEducationProps> = ({ title, school, date, lang }) => {
   const [t] = useTranslation('common');
-  
   const locale: Locale = useMemo(() => {
     if (locales[lang] !== undefined)
       return locales[lang];
@@ -23,20 +27,22 @@ const Education: React.FC<{ degrees: IDegree[], lang: string }> = ({ degrees, la
       return enUS
   }, [lang]);
   
-  return <>
-    <h4 className="text-primary">Education</h4>
-    {degrees && degrees.map((degree: IDegree, index: number) => (
-      <Row key={index}>
-        <Col xs={1}><Image src={degree.school.logo} fluid /> </Col>
+  return <Row className="mb-2">
+      <Col xs={1} className="pe-0 pe-sm-2 px-md-auto"><Image src={school.logo} fluid /> </Col>
         <Col xs={11}>
-          <h5><Translate translation={degree.title.translation} /></h5>
-          <div><em>{t('CV.education.At')}  <a href="degree.school.link">{degree.school.name}</a></em></div>
-          <small><strong>{format(new Date(degree.date), dateFormat, { locale: locale })}</strong></small>
+          <h5><Translate translation={title.translation} /></h5>
+          <div><em>{t('CV.education.At')}  <a href="degree.school.link">{school.name}</a></em></div>
+          <small><strong>{format(new Date(date), dateFormat, { locale: locale })}</strong></small>
           
         </Col>
       </Row>
-    ))}
-  </>
+}
+
+const Educations: React.FC<{ degrees: IDegree[], lang: string }> = ({ degrees, lang }) => {
+  const [t] = useTranslation('common');
+  return <SortableSection title={t('CV.education.title')}
+    sort={(a: IDegree, b: IDegree) => (new Date(a.date).getTime() - new Date(b.date).getTime())}
+    items={degrees} Component={Education} />
 }
 
 const mapStateToProps = (state: any) => ({
@@ -44,4 +50,4 @@ const mapStateToProps = (state: any) => ({
   lang: state.preferences.lang
 })
 
-export default connect(mapStateToProps)(Education);
+export default connect(mapStateToProps)(Educations);
