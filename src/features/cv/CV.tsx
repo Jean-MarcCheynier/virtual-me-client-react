@@ -6,8 +6,6 @@ import { Card, Container } from 'react-bootstrap';
 import Skills from './Skill';
 import Experiences from './Experience';
 import Educations from './Education';
-import { PDFDownloadLink, Document, Page } from '@react-pdf/renderer';
-import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
 interface ICVProps {
   cv: ICv,
@@ -19,23 +17,9 @@ interface ICVProps {
 
 
 const CV: React.FC<ICVProps> = (props: ICVProps) => {
-  
-  const container = React.useRef(null);
-  
-  const exportPDFWithMethod = () => {
-    let element = container.current || document.body;
-    savePDF(element, {
-      paperSize: "auto",
-      margin: 40,
-      fileName: `Report for ${new Date().getFullYear()}`,
-    });
-  };
-  
+
   return <>
-    <button className="btn btn-primary" onClick={exportPDFWithMethod}>
-      Export with method
-    </button>
-    <div ref={container}>
+
     <Card className="mt-2">
     <Container className="px-2 px-sm-4">
       <Infos />
@@ -53,7 +37,6 @@ const CV: React.FC<ICVProps> = (props: ICVProps) => {
       <Educations />
     </Container>
       </Card>
-      </div>
   </>
 }
 

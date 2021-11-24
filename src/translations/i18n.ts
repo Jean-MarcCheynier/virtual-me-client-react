@@ -43,7 +43,6 @@ i18n.use(LanguageDetector)
 
 document.documentElement.lang = i18n.language;
 i18n.on('languageChanged', (lng) => {
-  console.log('langChanged');
   document.documentElement.setAttribute('lang', lng);
 })
 

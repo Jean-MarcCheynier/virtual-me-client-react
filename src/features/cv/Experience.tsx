@@ -60,9 +60,9 @@ const Experience: React.FC<any> = (props) => {
       </Col>
     </Row>
     {(skills && skills.length) &&
-      <Row>
-      {skills.map((skillName:any, index: number) => (<Col key={index}><SkillMini skillName={skillName}/></Col>))}
-      </Row>
+      <div>
+      {skills.map((skillName: any, index: number) => (<span key={index} className="mx-1"><SkillMini skillName={skillName} /></span>))}
+      </div>
     }
     </Card>
 }

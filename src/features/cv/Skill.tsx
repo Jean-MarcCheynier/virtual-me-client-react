@@ -6,7 +6,8 @@ import { Badge, Col, Row, Card } from 'react-bootstrap';
 import Translate from './Translate';
 import { HoverLevel, Level } from './Level';
 import { useTranslation } from 'react-i18next';
-import { FaAngular, FaGitAlt, FaJava, FaJsSquare, FaNodeJs, FaReact, FaPython, FaHtml5 } from 'react-icons/fa';
+import { FaAngular, FaGitAlt, FaJava, FaJsSquare, FaNodeJs, FaReact, FaPython, FaHtml5, FaDocker } from 'react-icons/fa';
+import { DiJqueryLogo } from 'react-icons/di'
 import { selectSkill } from './cvSlice';
 
 import './skill.scss';
@@ -18,9 +19,11 @@ const SkillIcons: Record<string, JSX.Element> = {
   'JAVA': <FaJava />,
   'REACT': <FaReact />,
   'ANGULAR': <FaAngular />,
+  'DOCKER': <FaDocker />,
   'GIT': <FaGitAlt />,
   'WEB': <FaHtml5 />,
   'PYTHON': <FaPython />,
+  'JQUERY': <DiJqueryLogo />,
   'ENGLISH': <span className="flag-icon flag-icon-gb"></span>,
   'FRENCH': <span className="flag-icon flag-icon-fr"></span>,
   'GERMAN': <span className="flag-icon flag-icon-de"></span>,
@@ -52,7 +55,7 @@ const Skill: React.FC<{ skill: any, onSelect: (skill: ISkill) => void }> = ({ sk
 export const SkillMini: React.FC<{ skillName: string }> = ({ skillName }) => {
   const skills = useSelector((state: any) => state?.cv?.list[0]?.skills); 
   const skill = skills.find((item: any) => (item.name === skillName));
-  return <Badge pill bg={skill.selected ? "primary" : "secondary"}><span>{SkillIcons[skill.name]}&nbsp;{skill.name}</span></Badge>
+  return <>{skill && <Badge pill bg={skill.selected ? "primary" : "secondary"}><span>{SkillIcons[skill.name]}&nbsp;{skill.name}</span></Badge>}</>
 }
 
 const Skills: React.FC<{ skills: ISkill[], selectSkill: (skill: ISkill) => void }> = ({ skills, selectSkill }) => {
