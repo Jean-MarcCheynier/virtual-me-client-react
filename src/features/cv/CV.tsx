@@ -5,31 +5,39 @@ import Infos from './Info';
 import { Card, Container } from 'react-bootstrap';
 import Skills from './Skill';
 import Experiences from './Experience';
-import Education from './Education';
+import Educations from './Education';
 
 interface ICVProps {
   cv: ICv,
   lang: string,
 }
 
+
+
+
+
 const CV: React.FC<ICVProps> = (props: ICVProps) => {
-  return <Card className="mt-2">
-    <Container>
+
+  return <>
+
+    <Card className="mt-2">
+    <Container className="px-2 px-sm-4">
       <Infos />
       <hr/>
     </Container>
-    <Container>
+    <Container className="px-2 px-sm-4">
       <Skills />
       <hr />
     </Container>
-    <Container>
+    <Container className="px-2 px-sm-4">
       <Experiences />
       <hr />
     </Container>
-    <Container>
-      <Education />
+    <Container className="px-2 px-sm-4">
+      <Educations />
     </Container>
-  </Card>
+      </Card>
+  </>
 }
 
 const mapStateToProps = (state: any) => {

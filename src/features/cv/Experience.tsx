@@ -1,12 +1,14 @@
 import React, { useMemo } from 'react'
 import { IExperience } from '@virtual-me/virtual-me-ts-core';
 import { format } from 'date-fns';
-import { Col, Image, Row } from 'react-bootstrap';
+import { Col, Image, Row, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import { connect } from 'react-redux';
+import { connect, useDispatch, useSelector } from 'react-redux';
 import Translate from './Translate';
 import { fr, enUS } from 'date-fns/locale'
+import SortableSection from './SortableContainer';
+import { SkillMini } from './Skill';
 
 const dateFormat = 'MMM yyyy'
 const locales: any = {
@@ -14,39 +16,65 @@ const locales: any = {
   "fr": fr
 }
 
+interface IExperienceProps extends IExperience {
+  lang: string
+}
+
+const Experience: React.FC<any> = (props) => {
+  const { company, title, from, to, description, skills, lang = "en" } = props;
+  const [t] = useTranslation('common');
+  const locale = locales[lang];
+  
+  const cvSkills = useSelector((state: any) => state?.cv?.list[0]?.skills);
+  
+  
+  const matchSelectedSkill = useMemo(() => {
+    console.log("MatchCVSkills")
+    const selectedList = cvSkills.filter((item: any) => (item.selected));
+    if (selectedList.length && skills.length) {
+      for (let item of selectedList) {
+        console.log(item.name)
+        console.log(skills)
+        if (skills.includes(item.name)) {
+          return true
+        }
+      }
+    }
+    return false;
+  }, [cvSkills, skills])
+  
+  return <Card className={matchSelectedSkill ?"shadow my-3 p-2 border-primary border-1":"py-2 border-0"}>
+    <Row>
+      <Col xs={1} className="pe-0 pe-sm-2 px-md-auto">
+        <Image fluid width="100" src={company.logo} />
+      </Col>
+      <Col xs={11}>
+        <h5 className={matchSelectedSkill?"text-primary ":"" }><Translate translation={title.translation} /></h5>
+        <div><em>{t('CV.experiences.At')} <a href={company.link}>{company.name}</a></em></div>
+        <small>
+          <strong>{format(new Date(from), dateFormat, { locale: locale })}</strong>
+          {` - `}
+          <strong>{format(new Date(to), dateFormat, { locale: locale })}</strong>
+        </small>
+        <ReactMarkdown>{description.translation[lang]}</ReactMarkdown>
+      </Col>
+    </Row>
+    {(skills && skills.length) &&
+      <div>
+      {skills.map((skillName: any, index: number) => (<span key={index} className="mx-1"><SkillMini skillName={skillName} /></span>))}
+      </div>
+    }
+    </Card>
+}
+
+
+
 const Experiences: React.FC<{ experiences: IExperience[], lang: string }> = ({ experiences, lang }) => {
   const [t] = useTranslation('common');
-  const locale: Locale = useMemo(() => {
-    if (locales[lang]!== undefined)
-      return locales[lang];
-    else
-      return enUS
-  }, [lang]);
-
-  return <>
-    <h4 className="text-primary">{t('CV.experiences.title')}</h4>
-    {
-      experiences && experiences.sort((a, b) => (new Date(b.from).getTime() - new Date(a.from).getTime()))
-        .map((experience: IExperience, index: number) => {
-          return <Row className="mb-2" key={index}>
-              <Col xs={1}>
-                <Image fluid width="100" src={experience.company.logo} />
-              </Col>
-              <Col xs={11}>
-                <h5><Translate translation={experience.title.translation} /></h5>
-                <div><em>{t('CV.experiences.At')} <a href={experience.company.link}>{experience.company.name}</a></em></div>
-                <small>
-                  <strong>{format(new Date(experience.from), dateFormat, { locale: locale })}</strong>
-                  {` - `}
-                  <strong>{format(new Date(experience.to), dateFormat, { locale: locale })}</strong>
-                </small>
-                <ReactMarkdown>{experience.description.translation[lang]}</ReactMarkdown>
-              </Col>
-            </Row>
-        })
-    }
-    </>
-}
+  return <SortableSection title={t('CV.experiences.title')}
+    sort={(a: IExperience, b: IExperience) => (new Date(a.from).getTime() - new Date(b.from).getTime() )}
+    items = { experiences } Component = { Experience } />
+} 
 
 const mapStateToProps = (state: any) => ({
   experiences: state.cv?.list[0]?.experiences,

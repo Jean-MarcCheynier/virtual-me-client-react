@@ -7,6 +7,12 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 import common_fr from "./fr/common.json";
 import common_en from "./en/common.json";
 
+import manual_fr from "./fr/manual.json";
+import manual_en from "./en/manual.json";
+
+import biography_fr from "./fr/biography.json";
+import biography_en from "./en/biography.json";
+
 i18n.use(LanguageDetector)
   .use(Backend)
   .use(initReactI18next)
@@ -21,10 +27,14 @@ i18n.use(LanguageDetector)
     },
     resources: {
       en: {
-        common: common_en               // 'common' is our custom namespace
+        common: common_en,
+        manual: manual_en,
+        bio: biography_en
       },
       fr: {
-        common: common_fr
+        common: common_fr,
+        manual: manual_fr,
+        bio: biography_fr
       },
     },
     fallbackLng: 'en',
@@ -33,7 +43,6 @@ i18n.use(LanguageDetector)
 
 document.documentElement.lang = i18n.language;
 i18n.on('languageChanged', (lng) => {
-  console.log('langChanged');
   document.documentElement.setAttribute('lang', lng);
 })
 
