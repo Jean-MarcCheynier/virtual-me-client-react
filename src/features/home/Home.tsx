@@ -10,6 +10,8 @@ import Signout from '../auth/Signout';
 import { Route, Switch, useRouteMatch } from 'react-router';
 import CV from '../cv/CV';
 import Presentation from './Presentation';
+import Manual from './Manual';
+import Biography from './Biography';
 
 type HomeProps = {
   auth: IAuthState;
@@ -32,15 +34,22 @@ const Home = (props: HomeProps) => {
           <FloatingChat display={[ChatLayout.FIXED]}/>
         </Col>
       </CSSTransition>
-      <Col style={{ maxHeight: '100vh', overflowY: 'scroll'}} >
-        <Switch>
-          <Route exact path={`${path}/cv`}>
-            <CV/>
-          </Route>
-          <Route path={path}>
-            <Presentation/>
-          </Route>
-        </Switch>
+      <Col style={{ maxHeight: '100vh', overflowY: 'scroll' }} >
+
+          <Switch>
+            <Route exact path={`${path}/cv`}>
+              <CV/>
+            </Route>
+            <Route exact path={`${path}/bio`}>
+              <Biography />
+            </Route>
+            <Route exact path={`${path}/manual`}>
+              <Manual />
+            </Route>
+            <Route path={path}>
+              <Presentation/>
+            </Route>
+          </Switch>
       </Col>
     </Row>
   </Container>
