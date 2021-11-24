@@ -21,7 +21,7 @@ const Info: React.FC<IInfoProps> = (props: IInfoProps) => {
   return <>
     {infos && <>
       <Row>
-        <Col className="text-center">
+        <Col className="text-center mt-3">
           <Image src={`${process.env.PUBLIC_URL}/me.jpeg`} style={{width: '50vw', maxWidth: '250px'}} roundedCircle />
         </Col>
       </Row>
@@ -37,27 +37,27 @@ const Info: React.FC<IInfoProps> = (props: IInfoProps) => {
         </Col>
       </Row>
       <Row>
-        {infos.contact.map((item: IContact) => {
+        {infos.contact.map((item: IContact, index: number) => {
             let el;
             switch (item.type) {
               case ContactType.EMAIL:
                 const contactEmail = item as IContactEmail;
-                el = <ContactEmail contact={contactEmail} />;
+                el = <ContactEmail key={index} contact={contactEmail} />;
                 break;
               case ContactType.PHONE:
                 const contactPhone = item as IContactPhone;
-                el = <ContactPhone contact={contactPhone} />;
+                el = <ContactPhone key={index} contact={contactPhone} />;
                 break;
               case ContactType.SOCIAL_NETWORK:
                 const contactSN = item as IContactSocialNetwork;
-                el = <ContactSocialNetwork contact={contactSN} />;
+                el = <ContactSocialNetwork key={index} contact={contactSN} />;
                 break;
               case ContactType.POST:
                 const contactPost = item as IContactPost;
-                el = <ContactPost contact={contactPost} />;
+                el = <ContactPost key={index} contact={contactPost} />;
                 break;
               default:
-                el = <></>
+                el = <React.Fragment key={index}></React.Fragment>
                 break;
             }
             return el;
