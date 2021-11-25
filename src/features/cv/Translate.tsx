@@ -1,21 +1,19 @@
 import ITranslatable from '@virtual-me/virtual-me-ts-core/lib/util/Translatable';
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 interface ITranslateProps extends ITranslatable {
   lang: string
 }
 
-const Translate: React.FC<ITranslateProps> = (props) => {
-  const { lang, translation } = props;
-  
-  const content = lang?translation[lang]:translation['en'];
+const Translate = (props: any) => {
+  const lang = useSelector((state: any) => state.preferences.lang)
+  const { translation } = props;
+  const content:string = lang?translation[lang]:translation['en'];
   
   return <>{content}</>
 }
 
-const mapStateToProps = (state: any) => ({
-  lang: state.preferences.lang
-})
 
-export default connect(mapStateToProps)(Translate)
+
+export default Translate;
