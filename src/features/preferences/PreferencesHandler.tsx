@@ -4,16 +4,22 @@ import { connect } from 'react-redux';
 import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router';
 import i18n from "i18next";
+import { selectMessageList } from '../chat/chatSlice';
+import { IMessage } from '@virtual-me/virtual-me-ts-core';
+import { setLang } from './preferencesSlice';
+import { useDispatch } from 'react-redux';
 
 interface PreferencesProps{
-    lang?: string
+    lang?: string,
+    messageList?: IMessage<any>[]
 }
 
 const PreferencesHandler = (props: PreferencesProps) => {
 
-    const { lang } = props;
+    const { lang, messageList } = props;
     const location = useLocation();
     const history = useHistory();
+    const dispatch = useDispatch();
 
     
     //On lang change update lang attributes present in i18n object and in the url
@@ -29,11 +35,22 @@ const PreferencesHandler = (props: PreferencesProps) => {
             }
         }
     }, [lang, history, location])
+    
+    //On message received change lang attributes present in i18n object and in the url
+    useEffect(() => {
+        if (messageList && messageList.length) {
+            const lastMessage = messageList[messageList.length - 1]
+            if (lang !== lastMessage.lang) {
+                dispatch(setLang(lastMessage.lang));
+            }   
+        }
+    }, [lang, messageList, history, location])
     return <></>
 }
 
 const mapStateToProps = ((state:any) => ({
-    'lang': state.preferences.lang
+    lang: state.preferences.lang,
+    messageList: selectMessageList(state)
 }));
 
 export default connect(mapStateToProps, null)(PreferencesHandler)

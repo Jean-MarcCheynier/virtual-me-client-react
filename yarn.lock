@@ -2346,10 +2346,10 @@
     "@typescript-eslint/types" "4.33.0"
     eslint-visitor-keys "^2.0.0"
 
-"@virtual-me/virtual-me-ts-core@^1.0.28":
-  version "1.0.28"
-  resolved "https://registry.yarnpkg.com/@virtual-me/virtual-me-ts-core/-/virtual-me-ts-core-1.0.28.tgz#6cd6853a43ce2e983549cc10fc9fb93a75a4c776"
-  integrity sha512-4aSB7/4ZlAnYDC6drqd448QMx44MzTx8nC+7dEK0QmKr5DFpgidd4S/+3KbFvs4ahPAJFtUT5Rwc/kZvWo8UNQ==
+"@virtual-me/virtual-me-ts-core@^1.0.30":
+  version "1.0.30"
+  resolved "https://registry.yarnpkg.com/@virtual-me/virtual-me-ts-core/-/virtual-me-ts-core-1.0.30.tgz#153ea33037e7998b06bd01f2d9732463ffee8132"
+  integrity sha512-Gvr04kH2IcgoPPFEav1MmJceuR6S+BpGJuvDD84+/uDh0PMEEec6Va1oE/9VBd2dchxajT26FHaU5lurVPE9iw==
   dependencies:
     intl "^1.2.5"
 
