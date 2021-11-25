@@ -37,7 +37,7 @@ const Skill: React.FC<{ skill: any, onSelect: (skill: ISkill) => void }> = ({ sk
   const textContent = skill.selected ? "text-white" : "";
   const textSpecial = skill.selected ? "text-white" : "text-primary";
   
-  return <Card className={skill.selected ? "bg-primary p-1 mb-1" :"mb-1 py-1 border-1 border-white skill-container"}><Row className={ skill.selected?"active":"" } onClick={() => onSelect(skill)}>
+  return <Card className={`skill-container ${skill.selected ? "selected bg-primary p-1 mb-1" :"mb-1 py-1 border-1 border-white"}`}><Row className={ skill.selected?"active":"" } onClick={() => onSelect(skill)}>
     <Col className={textSpecial} xs={1}>{SkillIcons[skill.name] }</Col>
     <Col className={textContent} xs={8}><Translate translation={skill.translation} /></Col>
     <Col className={textSpecial} xs={3}>

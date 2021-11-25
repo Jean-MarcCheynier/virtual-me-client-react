@@ -5,6 +5,7 @@ interface ISortableSectionProps<T> {
   title: string
   sort?: (a: T, b: T) => any
   items: T[],
+  args?: {},
   Component: React.FC<any>
   
 }
@@ -48,7 +49,7 @@ const SortHeader: React.FC< { filter: FilterEnum, setFilter: (next: FilterEnum) 
 }
 
 const SortableSection: React.FC<ISortableSectionProps<any>> = (props) => {
-  const { title, items, sort, Component } = props;
+  const { title, items, args, sort, Component } = props;
   const [filter, setFilter] = useState(FilterEnum.desc);
   
   const sortedItems = useMemo(() => {
@@ -68,7 +69,7 @@ const SortableSection: React.FC<ISortableSectionProps<any>> = (props) => {
   
   return <section>
     <SortHeader setFilter={setFilter} filter={filter}>{title}</SortHeader>
-    {sortedItems.map((item: any, index: number) => (<Component key={index} {...item} />))}
+    {sortedItems.map((item: any, index: number) => (<Component key={index} {...item} {...args} />))}
     
   </section>
 }

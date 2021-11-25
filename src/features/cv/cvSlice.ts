@@ -30,7 +30,6 @@ export const cvSlice = createSlice({
   reducers: {
     reset: () => getInitialState(),
     selectSkill: (state: any, action: PayloadAction<any>) => {
-      console.log("Selecting skill")
       const skillToSelect = action.payload;
       for (let cv of state.list) {
         for (let sk of cv.skills) {

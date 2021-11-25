@@ -12,12 +12,9 @@ const GihubAuth = (props: any) => {
   const { setToken, geMeAsync, auth } = props;
   
   useEffect(() => {
-    console.log(param.get("token"))
     const token = param.get('token');
     setToken(token)
     geMeAsync().then((r: any) => {
-      console.log("payload")
-      console.log(r)
       window.sessionStorage.setItem('virtualMe', JSON.stringify({ ...r.payload, "jwt": token }));
     })
   }, [geMeAsync, setToken, param])

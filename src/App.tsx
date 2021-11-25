@@ -28,7 +28,7 @@ function App() {
 
   
   return (
-    <div lang="">
+    <div>
       <PreferencesHandler/>
       <TransitionGroup>
         <CSSTransition

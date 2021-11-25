@@ -21,7 +21,7 @@ interface IExperienceProps extends IExperience {
 }
 
 const Experience: React.FC<any> = (props) => {
-  const { company, title, from, to, description, skills, lang = "en" } = props;
+  const { company, title, from, to, description, skills, lang } = props;
   const [t] = useTranslation('common');
   const locale = locales[lang];
   
@@ -29,12 +29,9 @@ const Experience: React.FC<any> = (props) => {
   
   
   const matchSelectedSkill = useMemo(() => {
-    console.log("MatchCVSkills")
     const selectedList = cvSkills.filter((item: any) => (item.selected));
     if (selectedList.length && skills.length) {
       for (let item of selectedList) {
-        console.log(item.name)
-        console.log(skills)
         if (skills.includes(item.name)) {
           return true
         }
@@ -73,7 +70,9 @@ const Experiences: React.FC<{ experiences: IExperience[], lang: string }> = ({ e
   const [t] = useTranslation('common');
   return <SortableSection title={t('CV.experiences.title')}
     sort={(a: IExperience, b: IExperience) => (new Date(a.from).getTime() - new Date(b.from).getTime() )}
-    items = { experiences } Component = { Experience } />
+    items={experiences} Component={Experience}
+    args={{ lang }}
+  />
 } 
 
 const mapStateToProps = (state: any) => ({
