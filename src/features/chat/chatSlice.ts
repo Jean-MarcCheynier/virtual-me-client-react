@@ -7,7 +7,8 @@ import { ITextMessage, IMessage } from '@virtual-me/virtual-me-ts-core';
 export enum ChatLayout {
   BUBBLE='bubble',
   FLOATING='floating',
-  FIXED='fixed'
+  FIXED = 'fixed',
+  NONE = 'none'
 }
 
 export interface ChatState {
@@ -79,8 +80,10 @@ export const chatSlice = createSlice({
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
     setLayout: (state, action) => {
-      const prevLayout = state.layout;
-      return { ...state, prevLayout: prevLayout, layout: action.payload }
+      if (state.layout !== ChatLayout.NONE)
+        return { ...state, prevLayout: state.layout, layout: action.payload }
+      else
+        return { ...state, layout: action.payload }
     },
     restoreLayout: (state ) =>({...state, layout: state.prevLayout}),
     addMessage: (state, action) => {
