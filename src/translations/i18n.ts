@@ -23,6 +23,11 @@ i18n.use(LanguageDetector)
     },
     interpolation: { escapeValue: false },  // React already does escaping
     react: {
+      bindI18n: 'languageChanged',
+      transEmptyNodeValue: '',
+      transKeepBasicHtmlNodesFor: ['br', 'strong', 'i'],
+      transSupportBasicHtmlNodes: true,
+      bindI18nStore: '',
       useSuspense: true
     },
     resources: {

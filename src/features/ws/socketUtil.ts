@@ -13,7 +13,6 @@ export const getSocket = (token: any) => {
   socket.on("test", (eventName, data) => {
     console.log("Test received");
     console.log(eventName); // ojIckSD2jqNzOqIrAGzL
-    console.log(data);
   });
 
   return socket;

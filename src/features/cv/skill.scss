@@ -2,7 +2,7 @@
 
 .skill-container{
   cursor: pointer;
-  &:hover{
+  &:not(.select):hover{
     padding: 0px 3px;
     background-color: $light;
     border: 1px solid $gray-400 !important;

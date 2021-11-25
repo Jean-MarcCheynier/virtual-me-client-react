@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next';
 import { format } from 'date-fns';
 import { fr, enUS } from 'date-fns/locale'
 import SortableSection from './SortableContainer';
+import { FaSchool } from 'react-icons/fa';
 
 const dateFormat = 'MMM yyyy'
 const locales: any = {
@@ -28,14 +29,20 @@ const Education: React.FC<IEducationProps> = ({ title, school, date, lang }) => 
   }, [lang]);
   
   return <Row className="mb-2">
-      <Col xs={1} className="pe-0 pe-sm-2 px-md-auto"><Image src={school.logo} fluid /> </Col>
-        <Col xs={11}>
-          <h5><Translate translation={title.translation} /></h5>
-          <div><em>{t('CV.education.At')}  <a href="degree.school.link">{school.name}</a></em></div>
-          <small><strong>{format(new Date(date), dateFormat, { locale: locale })}</strong></small>
-          
-        </Col>
-      </Row>
+      <Col xs={1} className="pe-0 pe-sm-2 px-md-auto">
+      {school.logo ?
+        <Image src={school.logo} fluid />
+        :
+        <div className="w-100 my-2 text-secondary text-center"><FaSchool style={{width: "100%", fontSize: '2rem'}} /></div>
+      }
+      </Col>
+      <Col xs={11}>
+        <h5><Translate translation={title.translation} /></h5>
+        <div><em>{t('CV.education.At')}  <a href="degree.school.link">{school.name}</a></em></div>
+        <small><strong>{format(new Date(date), dateFormat, { locale: locale })}</strong></small>
+        
+      </Col>
+    </Row>
 }
 
 const Educations: React.FC<{ degrees: IDegree[], lang: string }> = ({ degrees, lang }) => {

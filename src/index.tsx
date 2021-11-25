@@ -19,13 +19,13 @@ ReactDOM.render(
     <Provider store={store}>
       <Router>
       <WebSocketProvider>
-        <I18nextProvider i18n={i18n}>
+
 
             <Portal>
               <FloatingChat display={[ChatLayout.BUBBLE, ChatLayout.FLOATING]}/>
             </Portal>
             <App />
-        </I18nextProvider>
+
       </WebSocketProvider>
       </Router>
     </Provider>

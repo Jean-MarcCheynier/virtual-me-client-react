@@ -20,7 +20,7 @@ const CV: React.FC<ICVProps> = (props: ICVProps) => {
 
   return <>
 
-    <Card className="mt-2">
+    <Card className="my-2">
     <Container className="px-2 px-sm-4">
       <Infos />
       <hr/>
