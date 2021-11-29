@@ -13,10 +13,15 @@ const GihubAuth = (props: any) => {
   
   useEffect(() => {
     const token = param.get('token');
-    setToken(token)
-    geMeAsync().then((r: any) => {
-      window.sessionStorage.setItem('virtualMe', JSON.stringify({ ...r.payload, "jwt": token }));
-    })
+    if (token) {
+      setToken(token)
+      geMeAsync().then((r: any) => {
+        console.log("Writting in local storage")
+        console.log({ ...r.payload, "jwt": token })
+        const userToken = { ...r.payload, "jwt": token };
+        window.sessionStorage.setItem('virtualMe', JSON.stringify(userToken));
+      })
+    }
   }, [geMeAsync, setToken, param])
   
   useEffect(() => {

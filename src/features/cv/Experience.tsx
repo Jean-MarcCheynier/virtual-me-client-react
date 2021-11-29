@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { Col, Image, Row, Card } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import ReactMarkdown from 'react-markdown';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import Translate from './Translate';
 import { fr, enUS } from 'date-fns/locale'
 import SortableSection from './SortableContainer';
@@ -14,10 +14,6 @@ const dateFormat = 'MMM yyyy'
 const locales: any = {
   "en": enUS,
   "fr": fr
-}
-
-interface IExperienceProps extends IExperience {
-  lang: string
 }
 
 const Experience: React.FC<any> = (props) => {

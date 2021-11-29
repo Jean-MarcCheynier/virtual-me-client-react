@@ -24,6 +24,7 @@ const defaultOffset = {
 
 type FloatingChatProps = {
   chatLayout?: ChatLayout,
+  preferredColor?: string,
   prevLayout?: any,
   authenticated: any,
   display?: ChatLayout[],
@@ -37,7 +38,7 @@ type FloatingChatProps = {
  * @returns 
  */
 export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
-  const { chatLayout, display, restoreLayout, setLayout, authenticated } = props;
+  const { chatLayout, display, restoreLayout, setLayout, authenticated, preferredColor } = props;
   const [t] = useTranslation('common');
   const isTabletOrMobile = useMediaQuery({ query: '(max-width: 600px)' });
   //const isPortrait = useMediaQuery({ query: '(orientation: portrait)' });
@@ -91,7 +92,12 @@ export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
   //If it is not specified then the inner component is displayed by default.
   const displayContainer = display === undefined || (chatLayout && display && display.includes(chatLayout))
 
+  // Set container class according to layout
   const cClass = styles[`container-${chatLayout}`];
+  // Set bg according to color preferences
+  const preferredStyle = (preferredColor) ? { backgroundColor: preferredColor} : {}
+  
+  
   return (
     <CSSTransition
       in={chatLayout === ChatLayout.BUBBLE}
@@ -107,7 +113,8 @@ export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
         style={{
           ...(chatLayout === ChatLayout.FLOATING && !isTabletOrMobile) ? {
             ...position
-          } : {}
+          } : {},
+          ...preferredStyle
         }}
         onMouseDown={handleOnMouseDown}
         onClick={handleOnClick}
@@ -140,6 +147,7 @@ export const FloatingChat: React.FC<FloatingChatProps> = (props) => {
 
 const mapStateToProps = (state: any) => ({
   prevLayout: state.chat.prevLayout,
+  preferredColor: state.preferences?.color,
   chatLayout: selectChatLayout(state),
   authenticated: state.auth.role
 });

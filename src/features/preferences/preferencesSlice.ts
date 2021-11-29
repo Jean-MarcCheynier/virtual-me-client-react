@@ -2,7 +2,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const getInitialLang = () => {
     const pathName = window.location.pathname;
-    const lang = pathName.split('/')[1]
+    const lang = pathName.split('/')[1] || 'en';
     return lang;
 }
 
@@ -17,10 +17,12 @@ export const userPreferencesSlice = createSlice({
     initialState: getInitialState(),
     // The `reducers` field lets us define reducers and generate associated actions
     reducers: {
+        setPreferences: ( state, action) => ({ ...state, ...action.payload}),
         setLang: (state: any, action: any) => ({ ...state, lang: action.payload }),
-        reset: () => getInitialState()
+        reset: () => getInitialState(),
+        setColor: (state, action) => ({ ...state, color: action.payload})
     },
 });
 
-export const { setLang, reset } = userPreferencesSlice.actions;
+export const { setLang, reset, setColor, setPreferences } = userPreferencesSlice.actions;
 export default userPreferencesSlice.reducer;

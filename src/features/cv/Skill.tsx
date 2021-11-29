@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { connect, useSelector, useDispatch } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { ISkill, SkillType } from '@virtual-me/virtual-me-ts-core';
 import { Badge, Col, Row, Card } from 'react-bootstrap';
