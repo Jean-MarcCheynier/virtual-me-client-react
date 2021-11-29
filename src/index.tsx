@@ -5,13 +5,11 @@ import App from './App';
 import { store } from './app/store';
 import { Provider } from 'react-redux';
 import * as serviceWorker from './serviceWorker';
-import { I18nextProvider } from "react-i18next";
 import { BrowserRouter as Router } from "react-router-dom";
 import FloatingChat from './features/chat/FloatingChat';
 import Portal from './features/Portal';
 import WebSocketProvider from './features/ws/WebSocketProvider';
 import { ChatLayout } from './features/chat/chatSlice';
-import i18n from './translations/i18n';
 
 
 ReactDOM.render(

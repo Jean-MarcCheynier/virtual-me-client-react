@@ -10,7 +10,7 @@ export class VirtualMeAPI {
     if (!this.instance) {
       this.instance = axios.create({
         baseURL: process.env.REACT_APP_VIRTUAL_ME_API_BASE_URL,
-        timeout: 6000,
+        timeout: 15000,
         headers: {
           accept: '*/*',
           "Access-Control-Allow-Origin": "*",

@@ -19,10 +19,14 @@ export function Message(props: MessageProps) {
   const [t] = useTranslation('common')
   
   const handleOnQuickReply = (textMessage: string) => {
-    const newMessage: ITextMessage = new TextMessage(textMessage);
-    newMessage.from = {
-      type: RecipientType.USER
-    };
+    const newMessage: ITextMessage = {
+      type: MessageType.TEXT,
+      from: {
+        type: RecipientType.USER
+      },
+      content: textMessage
+    }
+
     onSubmit(newMessage)
   }
   

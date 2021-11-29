@@ -37,7 +37,7 @@ function App() {
           key={"id"}
         >
           <Switch location={location}>
-            <Route exact path="/"><Redirect to="/en" /></Route>
+            <Route exact path="/"><Redirect to="/en/chat" /></Route>
             <Route exact path={`${baseRouteUrl}/signing/:provider`} component={GihubAuth} />
             <Route exact path={`${baseRouteUrl}`} render={props => (
               <Redirect to={`${props.match.params.lang}/chat/`} />)} />

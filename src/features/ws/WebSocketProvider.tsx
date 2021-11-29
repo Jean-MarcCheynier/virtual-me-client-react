@@ -1,6 +1,6 @@
 import React, { createContext, useMemo, useEffect } from 'react'
 import { connect, useDispatch } from 'react-redux';
-import { setLang } from '../preferences/preferencesSlice';
+import { setLang, setColor } from '../preferences/preferencesSlice';
 //import { useDispatch, Provider } from 'react-redux';
 import { getSocket } from './socketUtil';
 import { useHistory } from 'react-router';
@@ -31,22 +31,45 @@ function WebSocketProvider(props: WebSocketProviderProps) {
       return {};
     }
   }, [auth.jwt]);
+  
+
 
   //Init socket actions once ws is initialized
   useEffect(() => {
-    if(ws.socket) {
-      ws.socket.on("changeLang", (lang: any) => {
-        dispatch(setLang(lang))
-      });
-      ws.socket.on("openPage", (content: any) => {
-        if (content.type === "internal") {
-          history.push(`/${lang}/chat/${content.page}`);
-        } else {
-        }
-
-      });
-
+    
+    const changeLangHandler = (lang: any) => {
+      dispatch(setLang(lang))
     }
+
+    const changeColorHandler = (color: any) => {
+      dispatch(setColor(color))
+    }
+
+    const openContentHangler = (content: any) => {
+      if (content.type === "internal") {
+        history.push(`/${lang}/chat/${content.page}`);
+      } else {
+        if (content && content.page) {
+          setTimeout(() => {
+            const newPage = window.open(content.page, '_blank')
+            if (newPage)
+              newPage.focus()
+          }, 4000)         
+        }
+      }
+    }
+    
+    if (ws.socket) {
+      console.log("INIT SOCKET")
+      ws.socket.on("changeLang", changeLangHandler);
+      ws.socket.on("changeUserColor", changeColorHandler);
+      ws.socket.on("openPage", openContentHangler);
+    }
+    return () => {
+      ws.socket.off('changeLang', changeLangHandler);
+      ws.socket.off('changeUserColor', changeColorHandler);
+      ws.socket.off('openPage', openContentHangler);
+    };
 
   }, [ws, dispatch, history, lang])
   

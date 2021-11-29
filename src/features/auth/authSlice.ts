@@ -3,7 +3,7 @@ import { RootState } from '../../app/store';
 import { signin, signup, getMe } from './authAPI';
 import { IUser, Role } from '@virtual-me/virtual-me-ts-core';
 import { reset as resetCv } from '../cv/cvSlice';
-import { reset as resetPreferences } from '../preferences/preferencesSlice'
+import { reset as resetPreferences, setPreferences } from '../preferences/preferencesSlice'
 
 
 export interface IAuthState {
@@ -43,8 +43,22 @@ const getInitialState: () => IAuthState = () => {
 
 export const geMeAsync = createAsyncThunk(
   'auth/me',
-  async () => {
+  async (payload, thunkAPI) => {
+    console.log("geMeAsync");
     const response = await getMe();
+    if (response.data && response.data.session) {
+      const { lang, color } = response.data.session as any;
+      let preferences: any = {};
+      if (lang) {
+        preferences.lang = lang;
+      }
+      if (color) {
+        preferences.color = color;
+      }
+      console.log("PREFERENCES");
+      console.log(preferences);
+      thunkAPI.dispatch(setPreferences(preferences))
+    }
     return response.data;
   }
 );
@@ -54,6 +68,17 @@ export const signinAsync = createAsyncThunk(
   'auth/signin',
   async (payload: { login: string, password: string }, thunkAPI) => {
     const response = await signin(payload).catch(e => { throw thunkAPI.rejectWithValue(e) });
+    if (response.data && response.data.session) {
+      const { lang, color } = response.data.session as any;
+      let preferences: any = {};
+      if (lang) {
+        preferences.lang = lang;
+      }
+      if (color) {
+        preferences.color = color;
+      }
+      thunkAPI.dispatch(setPreferences(preferences))
+    }
     window.sessionStorage.setItem('virtualMe', JSON.stringify(response.data));
     return response.data;
   }

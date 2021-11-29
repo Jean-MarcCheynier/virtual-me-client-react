@@ -14,13 +14,15 @@ function Landing() {
   const dispatch = useDispatch();
   const { lang } = useParams<{ lang: string }>();
   
+
   useEffect(() => { 
     dispatch(setLayout("none"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   
   useEffect(() => {
     const onKeyDownListener = (e: any) => {
-      if (isTabletOrMobile)
+      if (isTabletOrMobile) 
         dispatch(setLayout(ChatLayout.FIXED));
       else
         dispatch(setLayout(ChatLayout.BUBBLE));
@@ -36,7 +38,7 @@ function Landing() {
       document.removeEventListener('keydown', onKeyDownListener);
       document.removeEventListener('click', onKeyDownListener);
     }
-  }, [history, lang, isTabletOrMobile]);
+  }, [history, lang, isTabletOrMobile, dispatch]);
   
   return <Container>
     <TypeWriterContainer className='text-primary'>

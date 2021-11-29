@@ -24,9 +24,10 @@ const PreferencesHandler = (props: PreferencesProps) => {
     
     //On lang change update lang attributes present in i18n object and in the url
     useEffect(() => {
+        const urlLang = location.pathname.split('/')[1];
+        const validUrlLang = ['en', 'fr'].includes(urlLang);
         if (lang) {
-            const urlLang = location.pathname.split('/')[1]
-            if (lang !== urlLang) {
+            if (validUrlLang && lang !== urlLang) {
                 const newLoc = location.pathname.replace(new RegExp(/(\/)([^/]*)(\/.*)/), `$1${lang}$3`)
                 history.push(newLoc);
             }
@@ -37,14 +38,7 @@ const PreferencesHandler = (props: PreferencesProps) => {
     }, [lang, history, location])
     
     //On message received change lang attributes present in i18n object and in the url
-    useEffect(() => {
-        if (messageList && messageList.length) {
-            const lastMessage = messageList[messageList.length - 1]
-            if (lang !== lastMessage.lang) {
-                dispatch(setLang(lastMessage.lang));
-            }   
-        }
-    }, [lang, messageList, history, location])
+
     return <></>
 }
 

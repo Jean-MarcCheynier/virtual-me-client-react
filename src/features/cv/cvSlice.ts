@@ -1,7 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { getAll } from './cvAPI';
-import { ICv, ISkill } from '@virtual-me/virtual-me-ts-core';
-import Skills from './Skill';
+import { ICv } from '@virtual-me/virtual-me-ts-core';
 
 
 export interface ICVState {
