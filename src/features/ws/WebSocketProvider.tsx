@@ -66,9 +66,11 @@ function WebSocketProvider(props: WebSocketProviderProps) {
       ws.socket.on("openPage", openContentHangler);
     }
     return () => {
-      ws.socket.off('changeLang', changeLangHandler);
-      ws.socket.off('changeUserColor', changeColorHandler);
-      ws.socket.off('openPage', openContentHangler);
+      if (ws.socket) {
+        ws.socket.off('changeLang', changeLangHandler);
+        ws.socket.off('changeUserColor', changeColorHandler);
+        ws.socket.off('openPage', openContentHangler);
+      }
     };
 
   }, [ws, dispatch, history, lang])
